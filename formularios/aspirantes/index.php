@@ -36,6 +36,7 @@ $cont++;
         <link rel="stylesheet" href="../../dist/css/alertify.core.css" />
     	<link rel="stylesheet" href="../../dist/css/alertify.default.css" id="toggleCSS" />
 
+		<link rel="stylesheet" href="../../dist/css/select2.min.css" />
         <!-- text fonts -->
         <link rel="stylesheet" href="../../dist/css/fontdc.css" />
 
@@ -66,199 +67,227 @@ $cont++;
                             <li class="active">Aspirantes</li>
                         </ul>
                     </div>
-					<div class="page-content">
+					<div class="page-content">						
 						<div class="row">
-							<div class="widget-body">
-								<div class="widget-main">
-									<div class="row">
-										<form class="form-horizontal" role="form" name="form_aspirantes" id="form_aspirantes">
-											<div class="row">
-												<div class="col-xs-12">
-													<div class="tabbable">
-														<ul class="nav nav-tabs" id="myTab">
-															<li class="active">
-																<a data-toggle="tab" href="#info_pro">
-																	<i class="green ace-icon fa fa-pencil-square-o bigger-125"></i>
-																	Información Aspirante
-																</a>
-															</li>
+							<div class="col-xs-12">
+								<!-- PAGE CONTENT BEGINS -->								
+								<div class="widget-box">
+									<div class="widget-header widget-header-blue widget-header-flat">
+										<h4 class="widget-title lighter">New Item Wizard</h4>										
+									</div>
 
-															<li>
-																<a data-toggle="tab" href="#deta_adici">
-																<i class="purple ace-icon fa fa-cubes bigger-120"></i>
-																	Detalles Adicionales
-																</a>
-															</li>
-														</ul>
+									<div class="widget-body">
+										<div class="widget-main">
+											<div id="fuelux-wizard-container">
+												<div>
+													<ul class="steps">
+														<li data-step="1" class="active">
+															<span class="step">1</span>
+															<span class="title">Validation states</span>
+														</li>
 
-														<div class="tab-content">
-															<div id="info_pro" class="tab-pane fade in active">
+														<li data-step="2">
+															<span class="step">2</span>
+															<span class="title">Alerts</span>
+														</li>
 
-												<div class="col-sm-6">
-													<div class="form-group">
-														<label class="col-sm-4 control-label no-padding-right" for="tipo_documento"> Tipo Documento:</label>
-														<div class="col-sm-8">
-															<select class="chosen-select form-control" id="tipo_documento" name="tipo_documento" data-placeholder="Tipo Documento">
-																<option value="Cedula">Cédula</option>	
-																<option value="RUC">RUC</option>	
-																<option value="Pasaporte">Pasaporte</option>																				
-															</select>						
-															<input type="hidden" id="id_aspirante" name="id_aspirante" />
-															<input type="hidden" id="comprobante" name="comprobante" value="<?php echo $cont ?>" />											
-														</div>
-													</div>
+														<li data-step="3">
+															<span class="step">3</span>
+															<span class="title">Payment Info</span>
+														</li>
 
-													<div class="form-group">
-														<label class="col-sm-4 control-label no-padding-right" for="nombres_aspirantes"> Nombres: <font color="red">*</font></label>
-														<div class="col-sm-8">
-															<input type="text" id="nombres_aspirantes" name="nombres_aspirantes"  placeholder="Nombres Completos" class="form-control" data-toggle="tooltip" data-original-title="" required pattern="[0-9]{10,10}"/>																																																						
-														</div>
-													</div>
-
-													<div class="form-group">
-														<label class="col-sm-4 control-label no-padding-right" for="telf_aspirante"> Teléfono:</label>
-														<div class="col-sm-8">
-															<span class="block input-icon input-icon-right">
-																<input type="text" id="telf_aspirante" name="telf_aspirante" placeholder="Teléfono Aspirante" class="form-control"/>
-																<i class="ace-icon fa fa-phone fa-flip-horizontal"></i>
-			                                                </span>
-														</div>
-													</div>
-
-													<div class="form-group">																	
-														<label class="col-sm-4 control-label no-padding-right" for="fnac_aspirante">Fecha Nacimiento: <font color="red">*</font></label>
-														<div class="col-sm-8">
-															<div class="input-group">
-																<input class="form-control date-picker" id="fnac_aspirante" name="fnac_aspirante" readonly type="text" data-date-format="yyyy-mm-dd" />
-																<span class="input-group-addon">
-																	<i class="fa fa-calendar bigger-110"></i>
-																</span>
-															</div>
-														</div>																														
-													</div>
-
-													<div class="form-group">
-														<label class="col-sm-4 control-label no-padding-right" for="mail_aspirante"> Correo:</label>
-														<div class="col-sm-8">
-															<span class="block input-icon input-icon-right">
-																<input type="text" id="mail_aspirante" name="mail_aspirante" placeholder="Correo Aspirante" class="form-control" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}" />
-																<i class="ace-icon fa fa-envelope fa-flip-horizontal"></i>
-			                                                </span>
-														</div>
-													</div>
-
-													<div class="form-group">
-														<label class="col-sm-4 control-label no-padding-right" for="ciudad_aspirante"> Ciudad: <font color="red">*</font></label>
-														<div class="col-sm-8">
-															<input type="text" id="ciudad_aspirante" name="ciudad_aspirante"  placeholder="Ciudad Aspirante" class="form-control" data-toggle="tooltip" data-original-title=""  />																																																						
-														</div>
-													</div>
-
-													<div class="form-group">
-					                                  <label class="col-sm-4 control-label no-padding-right" for="archivo"> Foto:</label>
-					                                  <div class="col-sm-8">
-					                                  	<input type="file" name="archivo" id="archivo" onchange='Test.UpdatePreview(this)' accept="image/*">
-					                                  </div>
-					                                </div>
-
-					                                <div class="form-group">
-					                                	<label class="col-sm-4 control-label no-padding-right" for=""></label>
-					                                	<div class="col-sm-8" style="width: 180px; height: 180px; align="center" " title="LOGO">
-					                                      <img id="foto" name="foto" style="width: 100%; height: 100%"  />
-					                                  </div>
-					                                </div>
+														<li data-step="4">
+															<span class="step">4</span>
+															<span class="title">Other Info</span>
+														</li>
+													</ul>
 												</div>
 
-												<div class="col-sm-6">
-													<div class="form-group">
-														<label class="col-sm-4 control-label no-padding-right" for="ruc_ci"> RUC/C.I.: <font color="red">*</font></label>
-														<div class="col-sm-8">
-															<input type="text" id="ruc_ci" name="ruc_ci"  placeholder="Identificación Aspirante" class="form-control" data-toggle="tooltip" data-original-title="" required pattern="[0-9]{10,10}" maxlength="10" minlength="10" />																																																						
-														</div>
+												<hr />
+
+												<div class="step-content pos-rel">
+													<div class="step-pane active" data-step="1">
+														<h3 class="lighter block green">Datos Personales</h3>														
+														<form class="form-horizontal " id="validation-form" method="get">																														
+															<div class="col-md-6">																
+																<div class="form-group">
+																	<label class="control-label col-xs-3 col-sm-3 no-padding-right" for="txt_1">Email Address:</label>
+																	<div class="col-xs-5 col-sm-5">																		
+																		<input type="text" name="txt_1" id="txt_1" class="col-xs-12 col-sm-12" />																		
+																	</div>
+																</div>								                            	
+								                            </div>														
+								                            <div class="col-md-6">																
+																<div class="form-group">
+																	<label class="control-label col-xs-3 col-sm-3 no-padding-right" for="txt_2">Email Address:</label>
+																	<div class="col-xs-5 col-sm-5">																		
+																		<input type="text" name="txt_2" id="txt_2" class="col-xs-12 col-sm-12" />																		
+																	</div>
+																</div>								                            	
+								                            </div>														
+
+														</form>															
 													</div>
 
-													<div class="form-group">
-														<label class="col-sm-4 control-label no-padding-right" for="apellidos_aspirantes"> Apellidos: <font color="red">*</font></label>
-														<div class="col-sm-8">
-															<input type="text" id="apellidos_aspirantes" name="apellidos_aspirantes"  placeholder="Apellidos Completos" class="form-control" data-toggle="tooltip" data-original-title="" required pattern="[0-9]{10,10}" />																																																						
-														</div>
-													</div>
+													<div class="step-pane" data-step="2">
+														<div>
+															<div class="alert alert-success">
+																<button type="button" class="close" data-dismiss="alert">
+																	<i class="ace-icon fa fa-times"></i>
+																</button>
 
-													<div class="form-group">
-														<label class="col-sm-4 control-label no-padding-right" for="movil_aspirante"> Celular: </label>																	
-														<div class="col-sm-8">
-															<span class="block input-icon input-icon-right">
-																<input type="text" id="movil_aspirante" name="movil_aspirante" placeholder="Celular Aspirante" class="form-control" />
-																<i class="ace-icon fa fa-mobile fa-flip-horizontal"></i>
-			                                                </span>
-														</div>
-													</div>
+																<strong>
+																	<i class="ace-icon fa fa-check"></i>
+																	Well done!
+																</strong>
 
-													<div class="form-group">
-														<label class="col-sm-4 control-label no-padding-right" for="genero_aspirante"> Genero: </label>
-														<div class="col-sm-8">
-															<select class="chosen-select form-control" id="genero_aspirante" name="genero_aspirante" data-placeholder="Genero">
-																<option value="Masculino">Masculino</option>	
-																<option value="Femenino">Femenino</option>	
-															</select>						
-														</div>
-													</div>
-
-													<div class="form-group">
-														<label class="col-sm-4 control-label no-padding-right" for="pais_aspirante"> País: <font color="red">*</font></label>
-														<div class="col-sm-8">
-															<input type="text" id="pais_aspirante" name="pais_aspirante"  placeholder="País Aspirante" class="form-control" data-toggle="tooltip" data-original-title=""  />																																																						
-														</div>
-													</div>
-
-													<div class="form-group">
-														<label class="col-sm-4 control-label no-padding-right" for="direccion_aspirante"> Dirección: <font color="red">*</font></label>
-														<div class="col-sm-8">
-															<input type="text" id="direccion_aspirante" name="direccion_aspirante"  placeholder="Dirección Aspirante" class="form-control" data-toggle="tooltip" data-original-title=""  />																																																						
-														</div>
-													</div>
-
-													<div class="form-group">
-														<label class="col-sm-4 control-label no-padding-right" for="comentarios"> Comentarios:</label>
-														<div class="col-sm-8">	
-															<textarea id="comentarios" name="comentarios" placeholder="" class="form-control" ></textarea>
-														</div>
-													</div>
-												</div>
+																You successfully read this important alert message.
+																<br />
 															</div>
-															<div id="deta_adici" class="tab-pane fade ">
-																Seguir........
+
+															<div class="alert alert-danger">
+																<button type="button" class="close" data-dismiss="alert">
+																	<i class="ace-icon fa fa-times"></i>
+																</button>
+
+																<strong>
+																	<i class="ace-icon fa fa-times"></i>
+																	Oh snap!
+																</strong>
+
+																Change a few things up and try submitting again.
+																<br />
 															</div>
-												       </div>
+
+															<div class="alert alert-warning">
+																<button type="button" class="close" data-dismiss="alert">
+																	<i class="ace-icon fa fa-times"></i>
+																</button>
+																<strong>Warning!</strong>
+
+																Best check yo self, you're not looking too good.
+																<br />
+															</div>
+
+															<div class="alert alert-info">
+																<button type="button" class="close" data-dismiss="alert">
+																	<i class="ace-icon fa fa-times"></i>
+																</button>
+																<strong>Heads up!</strong>
+
+																This alert needs your attention, but it's not super important.
+																<br />
+															</div>
+														</div>
+													</div>
+
+													<div class="step-pane" data-step="3">
+														<div class="center">
+															<h3 class="blue lighter">This is step 3</h3>
+														</div>
+													</div>
+
+													<div class="step-pane" data-step="4">
+														<div class="center">
+															<h3 class="green">Congrats!</h3>
+															Your product is ready to ship! Click finish to continue!
+														</div>
 													</div>
 												</div>
 											</div>
-										</form>
 
-										<div class="clearfix form-actions center">
-											<button type="submit" class="btn btn-primary" id="btn_Guardar"><i class="ace-icon fa fa-floppy-o bigger-120 white"></i>
-												Guardar
-											</button>
-											<button type="button" id="btn_Modificar" class="btn btn-primary"><i class="ace-icon fa fa-refresh bigger-120 white"></i>
-												Modificar
-											</button>
-											<button type="button" id="btn_Limpiar" class="btn btn-primary"><i class="ace-icon fa fa-file-o bigger-120 white"></i>
-												Nuevo
-											</button>
-											<button data-toggle="modal" href="#myModal" type="button" id="btn_Buscar" class="btn btn-primary"><i class="ace-icon fa fa-search bigger-120 white"></i>
-												Buscar
-											</button>
-											<button type="button" id="btn_Atras" class="btn btn-primary"><i class="ace-icon fa fa-arrow-circle-left bigger-120 white"></i>
-												Atras
-											</button>
-											<button type="button" id="btn_Adelante" class="btn btn-primary"><i class="ace-icon fa fa fa-arrow-circle-right bigger-120 white"></i>
-												Adelante
-											</button>
+											<hr />
+											<div class="wizard-actions">
+												<button class="btn btn-prev">
+													<i class="ace-icon fa fa-arrow-left"></i>
+													Atras
+												</button>
+
+												<button class="btn btn-success btn-next" data-last="Finalizar">
+													Siguiente
+													<i class="ace-icon fa fa-arrow-right icon-on-right"></i>
+												</button>
+											</div>
+										</div><!-- /.widget-main -->
+									</div><!-- /.widget-body -->
+								</div>
+
+								<div id="modal-wizard" class="modal">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div id="modal-wizard-container">
+												<div class="modal-header">
+													<ul class="steps">
+														<li data-step="1" class="active">
+															<span class="step">1</span>
+															<span class="title">Validation states</span>
+														</li>
+
+														<li data-step="2">
+															<span class="step">2</span>
+															<span class="title">Alerts</span>
+														</li>
+
+														<li data-step="3">
+															<span class="step">3</span>
+															<span class="title">Payment Info</span>
+														</li>
+
+														<li data-step="4">
+															<span class="step">4</span>
+															<span class="title">Other Info</span>
+														</li>
+													</ul>
+												</div>
+
+												<div class="modal-body step-content">
+													<div class="step-pane active" data-step="1">
+														<div class="center">
+															<h4 class="blue">Step 1</h4>
+														</div>
+													</div>
+
+													<div class="step-pane" data-step="2">
+														<div class="center">
+															<h4 class="blue">Step 2</h4>
+														</div>
+													</div>
+
+													<div class="step-pane" data-step="3">
+														<div class="center">
+															<h4 class="blue">Step 3</h4>
+														</div>
+													</div>
+
+													<div class="step-pane" data-step="4">
+														<div class="center">
+															<h4 class="blue">Step 4</h4>
+														</div>
+													</div>
+												</div>
+											</div>
+
+											<div class="modal-footer wizard-actions">
+												<button class="btn btn-sm btn-prev">
+													<i class="ace-icon fa fa-arrow-left"></i>
+													Prev
+												</button>
+
+												<button class="btn btn-success btn-sm btn-next" data-last="Finish">
+													Next
+													<i class="ace-icon fa fa-arrow-right icon-on-right"></i>
+												</button>
+
+												<button class="btn btn-danger btn-sm pull-left" data-dismiss="modal">
+													<i class="ace-icon fa fa-times"></i>
+													Cancel
+												</button>
+											</div>
 										</div>
 									</div>
-								</div>
-							</div>
-						</div>
+								</div><!-- PAGE CONTENT ENDS -->
+							</div><!-- /.col -->
+						</div><!-- /.row -->
 					</div>
 				</div>
 			</div><!-- /.main-content -->
@@ -297,12 +326,7 @@ $cont++;
 		</script>
 		<script src="../../dist/js/bootstrap.min.js"></script>
 		<script src="../../dist/js/jquery-ui.custom.min.js"></script>
-		<script src="../../dist/js/jquery.ui.touch-punch.min.js"></script>
-		<script src="../../dist/js/jquery.easypiechart.min.js"></script>
-		<script src="../../dist/js/jquery.sparkline.min.js"></script>
-		<script src="../../dist/js/flot/jquery.flot.min.js"></script>
-		<script src="../../dist/js/flot/jquery.flot.pie.min.js"></script>
-		<script src="../../dist/js/flot/jquery.flot.resize.min.js"></script>
+		<script src="../../dist/js/jquery.ui.touch-punch.min.js"></script>						
 		<script src="../../dist/js/chosen.jquery.min.js"></script>
 		<script src="../../dist/js/date-time/bootstrap-datepicker.min.js"></script>
 		<script src="../../dist/js/date-time/bootstrap-timepicker.min.js"></script>
@@ -312,15 +336,184 @@ $cont++;
 		<script src="../../dist/js/jquery.gritter.min.js"></script>
 		<script src="../../dist/js/jquery.maskedinput.min.js"></script>
 		<script src="../../dist/js/alertify.min.js"></script>
+		<script src="../../dist/js/jqGrid/jquery.jqGrid.min.js"></script>
+        <script src="../../dist/js/jqGrid/i18n/grid.locale-en.js"></script>
+        <script src="../../dist/js/select2.min.js"></script>
 
+        <script src="../../dist/js/fuelux/fuelux.wizard.min.js"></script>
+		<script src="../../dist/js/jquery.validate.min.js"></script>
+		<script src="../../dist/js/additional-methods.min.js"></script>
+		<script src="../../dist/js/bootbox.min.js"></script>
 		<!-- ace scripts -->		
 		<script src="../../dist/js/ace-elements.min.js"></script>
 		<script src="../../dist/js/ace.min.js"></script>
-		<script src="../../dist/js/jqGrid/jquery.jqGrid.min.js"></script>
-        <script src="../../dist/js/jqGrid/i18n/grid.locale-en.js"></script>
+		
+		
 
         <script src="../generales.js"></script>
 		<script src="aspirantes.js"></script>
+		<script type="text/javascript">
+			jQuery(function($) {
+			
+				$('[data-rel=tooltip]').tooltip();
+			
+				$(".select2").css('width','200px').select2({allowClear:true})
+				.on('change', function(){
+					$(this).closest('form').validate().element($(this));
+				}); 
+			
+			
+				var $validation = true;
+				$('#fuelux-wizard-container')
+				.ace_wizard({
+					//step: 2 //optional argument. wizard will jump to step "2" at first
+					//buttons: '.wizard-actions:eq(0)'
+				})
+				.on('actionclicked.fu.wizard' , function(e, info){
+					if(info.step == 1 && $validation) {
+						if(!$('#validation-form').valid()) e.preventDefault();
+					}
+				})
+				.on('finished.fu.wizard', function(e) {
+					bootbox.dialog({
+						message: "Thank you! Your information was successfully saved!", 
+						buttons: {
+							"success" : {
+								"label" : "OK",
+								"className" : "btn-sm btn-primary"
+							}
+						}
+					});
+				}).on('stepclick.fu.wizard', function(e){
+					//e.preventDefault();//this will prevent clicking and selecting steps
+				});
+			
+			
+				//jump to a step
+				/**
+				var wizard = $('#fuelux-wizard-container').data('fu.wizard')
+				wizard.currentStep = 3;
+				wizard.setState();
+				*/
+			
+				//determine selected step
+				//wizard.selectedItem().step
+			
+			
+			
+				//hide or show the other form which requires validation
+				//this is for demo only, you usullay want just one form in your application
+				// $('#skip-validation').removeAttr('checked').on('click', function(){
+				// 	$validation = this.checked;
+				// 	if(this.checked) {
+				// 		$('#sample-form').hide();
+				// 		$('#validation-form').removeClass('hide');
+				// 	}
+				// 	else {
+				// 		$('#validation-form').addClass('hide');
+				// 		$('#sample-form').show();
+				// 	}
+				// })
+			
+			
+			
+				//documentation : http://docs.jquery.com/Plugins/Validation/validate
+			
+			
+				$.mask.definitions['~']='[+-]';
+				$('#phone').mask('(999) 999-9999');
+			
+				jQuery.validator.addMethod("phone", function (value, element) {
+					return this.optional(element) || /^\(\d{3}\) \d{3}\-\d{4}( x\d{1,6})?$/.test(value);
+				}, "Ingrese un número télefono válido");
+			
+				$('#validation-form').validate({
+					errorElement: 'div',
+					errorClass: 'help-block',
+					focusInvalid: false,
+					ignore: "",
+					rules: {
+						email: {
+							required: true,
+							email:true
+						},						
+						txt_1: {
+							required: true
+						},
+						txt_2: {
+							required: true
+						},						
+					},
+			
+					messages: {
+						txt_1,txt_2: {
+							required: "Este campo es requerido.",							
+						},
+						email: {
+							required: "Ingrese un correo válido.",
+							email: "Ingrese un correo válido.",
+						},						
+						password: {
+							required: "Especifique una contraseña.",
+							minlength: "Especifique una contraseña segura."
+						},												
+					},
+			
+			
+					highlight: function (e) {
+						$(e).closest('.form-group').removeClass('has-info').addClass('has-error');
+					},
+			
+					success: function (e) {
+						$(e).closest('.form-group').removeClass('has-error');//.addClass('has-info');
+						$(e).remove();
+					},
+			
+					errorPlacement: function (error, element) {
+						if(element.is('input[type=checkbox]') || element.is('input[type=radio]')) {
+							var controls = element.closest('div[class*="col-"]');
+							if(controls.find(':checkbox,:radio').length > 1) controls.append(error);
+							else error.insertAfter(element.nextAll('.lbl:eq(0)').eq(0));
+						}
+						else if(element.is('.select2')) {
+							error.insertAfter(element.siblings('[class*="select2-container"]:eq(0)'));
+						}
+						else if(element.is('.chosen-select')) {
+							error.insertAfter(element.siblings('[class*="chosen-container"]:eq(0)'));
+						}
+						else error.insertAfter(element.parent());
+					},
+			
+					submitHandler: function (form) {
+					},
+					invalidHandler: function (form) {
+					}
+				});
+			
+				
+				
+				
+				$('#modal-wizard-container').ace_wizard();
+				$('#modal-wizard .wizard-actions .btn[data-dismiss=modal]').removeAttr('disabled');
+				
+				
+				/**
+				$('#date').datepicker({autoclose:true}).on('changeDate', function(ev) {
+					$(this).closest('form').validate().element($(this));
+				});
+				
+				$('#mychosen').chosen().on('change', function(ev) {
+					$(this).closest('form').validate().element($(this));
+				});
+				*/
+				
+				
+				$(document).one('ajaxloadstart.page', function(e) {
+					//in ajax mode, remove remaining elements before leaving page
+					$('[class*=select2]').remove();
+				});
+			})
+		</script>	
 	</body>
 </html>  
 
