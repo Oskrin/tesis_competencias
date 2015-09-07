@@ -53,38 +53,36 @@
                             <li class="active">Lista Aspirantes</li>
                         </ul>
                     </div>
+
 					<div class="page-content">
 						<div class="row">
 							<div class="hr hr-18 dotted hr-double"></div>
-
-								<div class="row">
-									<div class="col-xs-12">
-										<h3 class="header smaller lighter blue">Lista de Aspirantes</h3>
-										<div class="clearfix">
-											<div class="pull-right tableTools-container"></div>
-										</div>
-										<div>
-											<table id="td_aspirantes" class="table table-striped table-bordered table-hover">
-												<thead>
-													<tr>
-														<th>ID</th>																	
-														<th>Identificación</th>																																		
-														<th>Nombres</th>																																																			
-														<th>Apellidos</th>																	
-														<th>Teléfono</th>																	
-														<th>Correo</th>																																		
-														<th>Dirección</th>
-														<th>Comentario</th>																																																		
-													</tr>
-												</thead>
-												<tbody>
-												</tbody>
-											</table>
-										</div>
+							<div class="row">
+								<div class="col-xs-12">
+									<h3 class="header smaller lighter blue">Lista de Aspirantes</h3>
+									<div class="clearfix">
+										<div class="pull-right tableTools-container"></div>
+									</div>
+									<div>
+										<table id="td_aspirantes" class="table table-striped table-bordered table-hover">
+											<thead>
+												<tr>
+													<th>ID</th>																	
+													<th>Identificación</th>																																		
+													<th>Nombres</th>																																																			
+													<th>Apellidos</th>																	
+													<th>Teléfono</th>																	
+													<th>Correo</th>																																		
+													<th>Dirección</th>
+													<th>Comentario</th>																																																		
+												</tr>
+											</thead>
+											<tbody>
+											</tbody>
+										</table>
 									</div>
 								</div>
-
-														
+							</div>							
 						</div>
 					</div>
 				</div>
@@ -124,13 +122,11 @@
 		<script src="../../dist/js/dataTables/extensions/TableTools/js/dataTables.tableTools.min.js"></script>
 		<script src="../../dist/js/dataTables/extensions/ColVis/js/dataTables.colVis.min.js"></script>
 
-
 		<!-- ace scripts -->
 		<script src="../../dist/js/ace-elements.min.js"></script>
 		<script src="../../dist/js/ace.min.js"></script>
 		<script src="../generales.js"></script>
-		<script src="lista_aspirantes.js"></script>
-		
+		<script src="lista_aspirantes.js"></script>	
 
 		<script type="text/javascript">
 			$(function(){
