@@ -39,12 +39,12 @@ $cont++;
 		<link rel="stylesheet" href="../../dist/css/select2.min.css" />
         <!-- text fonts -->
         <link rel="stylesheet" href="../../dist/css/fontdc.css" />
-
         <!-- ace styles -->
         <link rel="stylesheet" href="../../dist/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" />
         <link type="text/css" rel="stylesheet" id="ace-skins-stylesheet" href="../../dist/css/ace-skins.min.css">
         <link type="text/css" rel="stylesheet" id="ace-rtl-stylesheet" href="../../dist/css/ace-rtl.min.css">
         <script src="../../dist/js/ace-extra.min.js"></script>
+        <link type="text/css" rel="stylesheet" href="../../dist/css/system.css">
     </head>
 
     <body class="no-skin">
@@ -73,9 +73,8 @@ $cont++;
 								<!-- PAGE CONTENT BEGINS -->								
 								<div class="widget-box">
 									<div class="widget-header widget-header-blue widget-header-flat">
-										<h4 class="widget-title lighter">New Item Wizard</h4>										
+										<h4 class="widget-title lighter">DATOS ASPIRANTE</h4>										
 									</div>
-
 									<div class="widget-body">
 										<div class="widget-main">
 											<div id="fuelux-wizard-container">
@@ -83,22 +82,47 @@ $cont++;
 													<ul class="steps">
 														<li data-step="1" class="active">
 															<span class="step">1</span>
-															<span class="title">Validation states</span>
+															<span class="title">Datos Personales</span>
 														</li>
 
 														<li data-step="2">
 															<span class="step">2</span>
-															<span class="title">Alerts</span>
+															<span class="title">Idiomas</span>
 														</li>
 
 														<li data-step="3">
 															<span class="step">3</span>
-															<span class="title">Payment Info</span>
+															<span class="title">Proyectos Realizados</span>
 														</li>
 
 														<li data-step="4">
 															<span class="step">4</span>
-															<span class="title">Other Info</span>
+															<span class="title">Cursos Realizados</span>
+														</li>
+
+														<li data-step="5">
+															<span class="step">4</span>
+															<span class="title">Ponencias Realizadas</span>
+														</li>
+
+														<li data-step="6">
+															<span class="step">6</span>
+															<span class="title">Premios Obtenidos</span>
+														</li>
+
+														<li data-step="7">
+															<span class="step">7</span>
+															<span class="title">Publicaciones Obtenidas</span>
+														</li>
+
+														<li data-step="8">
+															<span class="step">8</span>
+															<span class="title">Experiencia Obtenida</span>
+														</li>
+
+														<li data-step="9">
+															<span class="step">9</span>
+															<span class="title">Títulos Obtenidos</span>
 														</li>
 													</ul>
 												</div>
@@ -111,7 +135,7 @@ $cont++;
 														<form class="form-horizontal " id="validation-form" method="get">																														
 															<div class="col-md-6">																
 																<div class="form-group">
-																	<label class="control-label col-xs-3 col-sm-3 no-padding-right" for="txt_1">Email Address:</label>
+																	<label class="control-label col-xs-3 col-sm-3 no-padding-right" for="txt_1">C.I.:</label>
 																	<div class="col-xs-5 col-sm-5">																		
 																		<input type="text" name="txt_1" id="txt_1" class="col-xs-12 col-sm-12" />																		
 																	</div>
@@ -119,66 +143,118 @@ $cont++;
 								                            </div>														
 								                            <div class="col-md-6">																
 																<div class="form-group">
-																	<label class="control-label col-xs-3 col-sm-3 no-padding-right" for="txt_2">Email Address:</label>
+																	<label class="control-label col-xs-3 col-sm-3 no-padding-right" for="txt_2">Apellidos:</label>
 																	<div class="col-xs-5 col-sm-5">																		
 																		<input type="text" name="txt_2" id="txt_2" class="col-xs-12 col-sm-12" />																		
 																	</div>
 																</div>								                            	
 								                            </div>														
-
+								                            <div class="col-md-6">																
+																<div class="form-group">
+																	<label class="control-label col-xs-3 col-sm-3 no-padding-right" for="txt_3">Nombres :</label>
+																	<div class="col-xs-5 col-sm-5">																		
+																		<input type="text" name="txt_3" id="txt_3" class="col-xs-12 col-sm-12" />																		
+																	</div>
+																</div>								                            	
+								                            </div>			
+								                            <div class="col-md-6">																
+																<div class="form-group">
+																	<label class="control-label col-xs-3 col-sm-3 no-padding-right" for="txt_4">Teléfono:</label>
+																	<div class="col-xs-5 col-sm-5">																		
+																		<input type="text" name="txt_4" id="txt_4" class="col-xs-12 col-sm-12" />																		
+																	</div>
+																</div>								                            	
+								                            </div>		
+								                            <div class="col-md-6">																
+																<div class="form-group">
+																	<label class="control-label col-xs-3 col-sm-3 no-padding-right" for="txt_5">Celular:</label>
+																	<div class="col-xs-5 col-sm-5">																		
+																		<input type="text" name="txt_5" id="txt_5" class="col-xs-12 col-sm-12" />																		
+																	</div>
+																</div>								                            	
+								                            </div>		
+								                            <div class="col-md-6">																
+																<div class="form-group">
+																	<label class="control-label col-xs-3 col-sm-3 no-padding-right" for="txt_6">F. Nacimiento:</label>
+																	<div class="col-xs-5 col-sm-5">																		
+																		<input type="text" name="txt_6" id="txt_6" class="col-xs-12 col-sm-12" />																		
+																	</div>
+																</div>								                            	
+								                            </div>		
+								                            <div class="col-md-6">																
+																<div class="form-group">
+																	<label class="control-label col-xs-3 col-sm-3 no-padding-right" for="txt_7">Genero:</label>
+																	<div class="col-xs-5 col-sm-5">																																				
+																		<select name="txt_7" id="txt_7" class="select2" data-placeholder="Seleccione un Genero">
+																		<option value="">&nbsp;</option>
+																		<option value="M">Masculino</option>
+																		<option value="F">Femenino</option>																		
+																	</select>																		
+																	</div>
+																</div>								                            	
+								                            </div>
+								                            <div class="col-md-6">																
+																<div class="form-group">
+																	<label class="control-label col-xs-3 col-sm-3 no-padding-right" for="txt_8">E-mail:</label>
+																	<div class="col-xs-5 col-sm-5">																		
+																		<input type="text" name="txt_8" id="txt_8" class="col-xs-12 col-sm-12" />																		
+																	</div>
+																</div>								                            	
+								                            </div>	
+								                            <div class="col-md-6">																
+																<div class="form-group">
+																	<label class="control-label col-xs-3 col-sm-3 no-padding-right" for="txt_9">País:</label>
+																	<div class="col-xs-5 col-sm-5">																																				
+																		<select name="txt_9" id="txt_9" class="select2" data-placeholder="Seleccione un País">
+																		<option value="">&nbsp;</option>
+																		
+																	</select>																																			
+																	</div>
+																</div>								                            	
+								                            </div>		
+								                            <div class="col-md-6">																
+																<div class="form-group">
+																	<label class="control-label col-xs-3 col-sm-3 no-padding-right" for="txt_10">Ciudad:</label>
+																	<div class="col-xs-5 col-sm-5">																																				
+																		<select name="txt_10" id="txt_10" class="select2" data-placeholder="Seleccione una ciudad">
+																		<option value="">&nbsp;</option>	
+																																																														
+																	</select>																		
+																	</div>
+																</div>								                            	
+								                            </div>			
+								                            <div class="col-md-6">																
+																<div class="form-group">
+																	<label class="control-label col-xs-3 col-sm-3 no-padding-right" for="txt_11">Dirección:</label>
+																	<div class="col-xs-5 col-sm-5">																		
+																		<input type="text" name="txt_11" id="txt_11" class="col-xs-12 col-sm-12" />																		
+																	</div>
+																</div>								                            	
+								                            </div>		
+								                            <div class="col-md-6">																
+																<div class="form-group">
+																	<label class="control-label col-xs-3 col-sm-3 no-padding-right" for="txt_12">Observaciones:</label>
+																	<div class="col-xs-5 col-sm-5">																												
+																		<textarea type="text" name="txt_12" id="txt_12" class="col-xs-12 col-sm-12" /></textarea>	
+																	</div>
+																</div>								                            	
+								                            </div>											                           
+								                            
 														</form>															
 													</div>
 
-													<div class="step-pane" data-step="2">
-														<div>
-															<div class="alert alert-success">
-																<button type="button" class="close" data-dismiss="alert">
-																	<i class="ace-icon fa fa-times"></i>
-																</button>
-
-																<strong>
-																	<i class="ace-icon fa fa-check"></i>
-																	Well done!
-																</strong>
-
-																You successfully read this important alert message.
-																<br />
-															</div>
-
-															<div class="alert alert-danger">
-																<button type="button" class="close" data-dismiss="alert">
-																	<i class="ace-icon fa fa-times"></i>
-																</button>
-
-																<strong>
-																	<i class="ace-icon fa fa-times"></i>
-																	Oh snap!
-																</strong>
-
-																Change a few things up and try submitting again.
-																<br />
-															</div>
-
-															<div class="alert alert-warning">
-																<button type="button" class="close" data-dismiss="alert">
-																	<i class="ace-icon fa fa-times"></i>
-																</button>
-																<strong>Warning!</strong>
-
-																Best check yo self, you're not looking too good.
-																<br />
-															</div>
-
-															<div class="alert alert-info">
-																<button type="button" class="close" data-dismiss="alert">
-																	<i class="ace-icon fa fa-times"></i>
-																</button>
-																<strong>Heads up!</strong>
-
-																This alert needs your attention, but it's not super important.
-																<br />
-															</div>
-														</div>
+													<div class="step-pane" data-step="2">														
+														<form class="form-horizontal " id="validation-form-2" method="get">																
+															<div class="form-group">
+																<div class="row">
+																	<div class="col-xs-12">
+																		<table id="grid-table"></table>
+											                            <div id="grid-pager"></div>
+										                            </div>								
+																</div>
+								                            </div>	
+														</form>
+														
 													</div>
 
 													<div class="step-pane" data-step="3">
@@ -220,7 +296,7 @@ $cont++;
 													<ul class="steps">
 														<li data-step="1" class="active">
 															<span class="step">1</span>
-															<span class="title">Validation states</span>
+															<span class="title">Datos Personales</span>
 														</li>
 
 														<li data-step="2">
@@ -352,168 +428,7 @@ $cont++;
 
         <script src="../generales.js"></script>
 		<script src="aspirantes.js"></script>
-		<script type="text/javascript">
-			jQuery(function($) {
-			
-				$('[data-rel=tooltip]').tooltip();
-			
-				$(".select2").css('width','200px').select2({allowClear:true})
-				.on('change', function(){
-					$(this).closest('form').validate().element($(this));
-				}); 
-			
-			
-				var $validation = true;
-				$('#fuelux-wizard-container')
-				.ace_wizard({
-					//step: 2 //optional argument. wizard will jump to step "2" at first
-					//buttons: '.wizard-actions:eq(0)'
-				})
-				.on('actionclicked.fu.wizard' , function(e, info){
-					if(info.step == 1 && $validation) {
-						if(!$('#validation-form').valid()) e.preventDefault();
-					}
-				})
-				.on('finished.fu.wizard', function(e) {
-					bootbox.dialog({
-						message: "Thank you! Your information was successfully saved!", 
-						buttons: {
-							"success" : {
-								"label" : "OK",
-								"className" : "btn-sm btn-primary"
-							}
-						}
-					});
-				}).on('stepclick.fu.wizard', function(e){
-					//e.preventDefault();//this will prevent clicking and selecting steps
-				});
-			
-			
-				//jump to a step
-				/**
-				var wizard = $('#fuelux-wizard-container').data('fu.wizard')
-				wizard.currentStep = 3;
-				wizard.setState();
-				*/
-			
-				//determine selected step
-				//wizard.selectedItem().step
-			
-			
-			
-				//hide or show the other form which requires validation
-				//this is for demo only, you usullay want just one form in your application
-				// $('#skip-validation').removeAttr('checked').on('click', function(){
-				// 	$validation = this.checked;
-				// 	if(this.checked) {
-				// 		$('#sample-form').hide();
-				// 		$('#validation-form').removeClass('hide');
-				// 	}
-				// 	else {
-				// 		$('#validation-form').addClass('hide');
-				// 		$('#sample-form').show();
-				// 	}
-				// })
-			
-			
-			
-				//documentation : http://docs.jquery.com/Plugins/Validation/validate
-			
-			
-				$.mask.definitions['~']='[+-]';
-				$('#phone').mask('(999) 999-9999');
-			
-				jQuery.validator.addMethod("phone", function (value, element) {
-					return this.optional(element) || /^\(\d{3}\) \d{3}\-\d{4}( x\d{1,6})?$/.test(value);
-				}, "Ingrese un número télefono válido");
-			
-				$('#validation-form').validate({
-					errorElement: 'div',
-					errorClass: 'help-block',
-					focusInvalid: false,
-					ignore: "",
-					rules: {
-						email: {
-							required: true,
-							email:true
-						},						
-						txt_1: {
-							required: true
-						},
-						txt_2: {
-							required: true
-						},						
-					},
-			
-					messages: {
-						txt_1,txt_2: {
-							required: "Este campo es requerido.",							
-						},
-						email: {
-							required: "Ingrese un correo válido.",
-							email: "Ingrese un correo válido.",
-						},						
-						password: {
-							required: "Especifique una contraseña.",
-							minlength: "Especifique una contraseña segura."
-						},												
-					},
-			
-			
-					highlight: function (e) {
-						$(e).closest('.form-group').removeClass('has-info').addClass('has-error');
-					},
-			
-					success: function (e) {
-						$(e).closest('.form-group').removeClass('has-error');//.addClass('has-info');
-						$(e).remove();
-					},
-			
-					errorPlacement: function (error, element) {
-						if(element.is('input[type=checkbox]') || element.is('input[type=radio]')) {
-							var controls = element.closest('div[class*="col-"]');
-							if(controls.find(':checkbox,:radio').length > 1) controls.append(error);
-							else error.insertAfter(element.nextAll('.lbl:eq(0)').eq(0));
-						}
-						else if(element.is('.select2')) {
-							error.insertAfter(element.siblings('[class*="select2-container"]:eq(0)'));
-						}
-						else if(element.is('.chosen-select')) {
-							error.insertAfter(element.siblings('[class*="chosen-container"]:eq(0)'));
-						}
-						else error.insertAfter(element.parent());
-					},
-			
-					submitHandler: function (form) {
-					},
-					invalidHandler: function (form) {
-					}
-				});
-			
-				
-				
-				
-				$('#modal-wizard-container').ace_wizard();
-				$('#modal-wizard .wizard-actions .btn[data-dismiss=modal]').removeAttr('disabled');
-				
-				
-				/**
-				$('#date').datepicker({autoclose:true}).on('changeDate', function(ev) {
-					$(this).closest('form').validate().element($(this));
-				});
-				
-				$('#mychosen').chosen().on('change', function(ev) {
-					$(this).closest('form').validate().element($(this));
-				});
-				*/
-				
-				
-				$(document).one('ajaxloadstart.page', function(e) {
-					//in ajax mode, remove remaining elements before leaving page
-					$('[class*=select2]').remove();
-				});
-			})
-		</script>	
+		
 	</body>
 </html>  
 
