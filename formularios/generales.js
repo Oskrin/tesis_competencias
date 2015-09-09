@@ -84,7 +84,7 @@ function actualizar_form(){
 
 
 function punto(e){                
-    if(e.keyCode == 46){        
+    if(e.keyCode == 46) {        
         var texto = $(this).val();     
         var buscar = '.';      
         var contador = 0;    
@@ -93,9 +93,9 @@ function punto(e){
             contador++; 
         }
         //console.log(contador)
-        if(contador <1 ){
+        if(contador <1 ) {
             return true;
-        } else{
+        } else {
             return false;
         }
     }    

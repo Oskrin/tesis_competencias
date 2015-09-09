@@ -244,7 +244,34 @@ $cont++;
 													</div>
 
 													<div class="step-pane" data-step="2">														
-														<form class="form-horizontal " id="validation-form-2" method="get">																
+														<form class="form-horizontal " id="validation-form-2" method="get">	
+															<div class="col-md-4">																
+																<div class="form-group">
+																	<label class="control-label col-xs-3 col-sm-3 no-padding-right" for="txt_1">Idioma:</label>
+																	<div class="col-xs-5 col-sm-5">																		
+																		<input type="text" name="txt_idioma" id="txt_idioma"/>																		
+																	</div>
+																</div>								                            	
+								                            </div>
+
+								                            <div class="col-md-4">																
+																<div class="form-group">
+																	<label class="control-label col-xs-3 col-sm-3 no-padding-right" for="txt_1">Nivel Lectura:</label>
+																	<div class="col-xs-5 col-sm-5">																		
+																		<input type="text" name="txt_lectura" id="txt_lectura"/>																		
+																	</div>
+																</div>								                            	
+								                            </div>
+
+								                            <div class="col-md-4">																
+																<div class="form-group">
+																	<label class="control-label col-xs-3 col-sm-3 no-padding-right" for="txt_1">Nivel Escritura:</label>
+																	<div class="col-xs-5 col-sm-5">																		
+																		<input type="text" name="txt_escritura" id="txt_escritura"/>																		
+																	</div>
+																</div>								                            	
+								                            </div>
+
 															<div class="form-group">
 																<div class="row">
 																	<div class="col-xs-12">

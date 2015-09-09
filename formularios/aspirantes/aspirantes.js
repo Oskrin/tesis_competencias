@@ -1,10 +1,47 @@
 $(document).on("ready",inicio);
 
 
-function inicio (){	    
+function inicio () {
+
+    // cargar datos primer step
+
+    $("#txt_escritura").on("keypress", function (e) {
+        if(e.keyCode == 13) {
+            var filas = jQuery("#grid-table").jqGrid("getRowData");
+            var su;
+            var count = 0;
+
+            if($("#txt_escritura").val() == "") {
+                $("#txt_escritura").focus();
+                alert("Ingrese Nivel Escritura");
+            } else {
+                if($("#txt_lectura").val() == "") {
+                    $("#txt_lectura").focus();
+                    alert("Ingrese Nivel Lectura");
+                } else {
+                    if($("#txt_idioma").val() == "") {
+                        $("#txt_idioma").focus();
+                        alert("Ingrese Idioma");
+                    } else {
+                        if (filas.length == 0) {
+                            var datarow = {
+                                id_idioma: count = count + 1, 
+                                nombre_idioma: $("#codigo").val(), 
+                                nivel_lectura: $("#producto").val(), 
+                                nivel_escritura: $("#cantidad").val()
+
+                                // su = jQuery("#grid-table").jqGrid('addRowData', count, datarow); 
+                            };
+                        }    
+                    }
+                }
+            }
+        }
+    });	    
 
     $('[data-rel=tooltip]').tooltip();
     var f = new Date();
+
     $('#txt_6').datepicker({
         autoclose: true,
         format:'yyyy-mm-dd',
