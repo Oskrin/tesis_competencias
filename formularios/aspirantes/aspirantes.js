@@ -46,7 +46,8 @@ function inicio () {
         autoclose: true,
         format:'yyyy-mm-dd',
         startView:0     
-    });        
+    });   
+         
     $(".select2").css('width','200px').select2({allowClear:true})
     .on('change', function(){
         $(this).closest('form').validate().element($(this));
@@ -302,7 +303,6 @@ function inicio () {
                 .datepicker({format:'yyyy-mm-dd' , autoclose:true}); 
             }, 0);
         }
-
 
         //navButtons
         jQuery(grid_selector).jqGrid('navGrid',pager_selector,
