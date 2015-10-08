@@ -2,47 +2,118 @@ $(document).on("ready",inicio);
 
 
 function inicio () {
+    // valida si ya existe
+    $("#ruc_ci").keyup(function() {
+        $.ajax({
+            type: "POST",
+            url: "comparar_aspirantes.php",
+            data: "cedula=" + $("#ruc_ci").val(),
+            success: function(data) {
+                var val = data;
+                if (val == 1) {
+                    $("#ruc_ci").val("");
+                    $("#ruc_ci").focus();
+                    alert("Error... El Aspirante ya esta registrado");
+                }else{
+                    var numero = $("#ruc_ci").val();
+                    var suma = 0;      
+                    var residuo = 0;      
+                    var pri = false;      
+                    var pub = false;            
+                    var nat = false;                     
+                    var modulo = 11;
+                    var p1;
+                    var p2;
+                    var p3;
+                    var p4;
+                    var p5;
+                    var p6;
+                    var p7;
+                    var p8;            
+                    var p9; 
+                    var d1  = numero.substr(0,1);         
+                    var d2  = numero.substr(1,1);         
+                    var d3  = numero.substr(2,1);         
+                    var d4  = numero.substr(3,1);         
+                    var d5  = numero.substr(4,1);         
+                    var d6  = numero.substr(5,1);         
+                    var d7  = numero.substr(6,1);         
+                    var d8  = numero.substr(7,1);         
+                    var d9  = numero.substr(8,1);         
+                    var d10 = numero.substr(9,1);  
 
-    // cargar datos primer step
+                    if (d3 < 6){           
+                        nat = true;            
+                        p1 = d1 * 2;
+                        if (p1 >= 10) p1 -= 9;
+                        p2 = d2 * 1;
+                        if (p2 >= 10) p2 -= 9;
+                        p3 = d3 * 2;
+                        if (p3 >= 10) p3 -= 9;
+                        p4 = d4 * 1;
+                        if (p4 >= 10) p4 -= 9;
+                        p5 = d5 * 2;
+                        if (p5 >= 10) p5 -= 9;
+                        p6 = d6 * 1;
+                        if (p6 >= 10) p6 -= 9; 
+                        p7 = d7 * 2;
+                        if (p7 >= 10) p7 -= 9;
+                        p8 = d8 * 1;
+                        if (p8 >= 10) p8 -= 9;
+                        p9 = d9 * 2;
+                        if (p9 >= 10) p9 -= 9;             
+                        modulo = 10;
+                    } else if(d3 == 6){           
+                        pub = true;             
+                        p1 = d1 * 3;
+                        p2 = d2 * 2;
+                        p3 = d3 * 7;
+                        p4 = d4 * 6;
+                        p5 = d5 * 5;
+                        p6 = d6 * 4;
+                        p7 = d7 * 3;
+                        p8 = d8 * 2;            
+                        p9 = 0;            
+                    } else if(d3 == 9) {          
+                        pri = true;                                   
+                        p1 = d1 * 4;
+                        p2 = d2 * 3;
+                        p3 = d3 * 2;
+                        p4 = d4 * 7;
+                        p5 = d5 * 6;
+                        p6 = d6 * 5;
+                        p7 = d7 * 4;
+                        p8 = d8 * 3;
+                        p9 = d9 * 2;            
+                    }
+                
+                    suma = p1 + p2 + p3 + p4 + p5 + p6 + p7 + p8 + p9;                
+                    residuo = suma % modulo;                                         
 
-    $("#txt_escritura").on("keypress", function (e) {
-        if(e.keyCode == 13) {
-            var filas = jQuery("#grid-table").jqGrid("getRowData");
-            var su;
-            var count = 0;
-
-            if($("#txt_escritura").val() == "") {
-                $("#txt_escritura").focus();
-                alert("Ingrese Nivel Escritura");
-            } else {
-                if($("#txt_lectura").val() == "") {
-                    $("#txt_lectura").focus();
-                    alert("Ingrese Nivel Lectura");
-                } else {
-                    if($("#txt_idioma").val() == "") {
-                        $("#txt_idioma").focus();
-                        alert("Ingrese Idioma");
-                    } else {
-                        if (filas.length == 0) {
-                            var datarow = {
-                                id_idioma: count = count + 1, 
-                                nombre_idioma: $("#codigo").val(), 
-                                nivel_lectura: $("#producto").val(), 
-                                nivel_escritura: $("#cantidad").val()
-
-                                // su = jQuery("#grid-table").jqGrid('addRowData', count, datarow); 
-                            };
-                        }    
+                    var digitoVerificador = residuo==0 ? 0: modulo - residuo; 
+                    ////////////verificamos validacioncedula////////////////////
+                    if (numero.length === 10) {
+                        if(nat == true){
+                            if (digitoVerificador != d10){                          
+                                alert('El número de cédula es incorrecto.');
+                                $("#ruc_ci").val("");
+                            }else{
+                                alert('El número de cédula es correcto.');
+                            }
+                        }
                     }
                 }
             }
-        }
-    });	    
+        });
+    });
+    // fin
+
+      carga_idiomas("idioma");
+
 
     $('[data-rel=tooltip]').tooltip();
-    var f = new Date();
 
-    $('#txt_6').datepicker({
+    $('#fecha_nacimiento').datepicker({
         autoclose: true,
         format:'yyyy-mm-dd',
         startView:0     
@@ -76,141 +147,143 @@ function inicio () {
     }).on('stepclick.fu.wizard', function(e){
         //e.preventDefault();//this will prevent clicking and selecting steps
     });
-    //documentation : http://docs.jquery.com/Plugins/Validation/validate
-
 
     $.mask.definitions['~']='[+-]';
-    $('#txt_4').mask('(999) 999-999');
-    $('#txt_5').mask('(99) 9999-9999');
-    $('#txt_6').mask('9999-99-99');
+    $('#telefono').mask('(999) 999-999');
+    $('#celular').mask('(99) 9999-9999');
+    $('#fecha_nacimiento').mask('9999-99-99');
 
-    jQuery.validator.addMethod("txt_4", function (value, element) {
+    jQuery.validator.addMethod("telefono", function (value, element) {
         return this.optional(element) || /^\(\d{3}\) \d{3}\-\d{3}( x\d{1,6})?$/.test(value);
     }, "Ingrese un número válido");
 
-    jQuery.validator.addMethod("txt_5", function (value, element) {
+    jQuery.validator.addMethod("celular", function (value, element) {
         return this.optional(element) || /^\(\d{2}\) \d{4}\-\d{4}( x\d{1,6})?$/.test(value);
     }, "Ingrese un número válido");
 
-    jQuery.validator.addMethod("txt_6", function (value, element) {
+    jQuery.validator.addMethod("fecha_nacimiento", function (value, element) {
         return this.optional(element) || /^\d{4}\-\d{2}\-\d{2}( x\d{1,6})?$/.test(value);
     }, "Ingrese un fecha válida");
 
+    // $('#validation-form').validate({
+    //     errorElement: 'div',
+    //     errorClass: 'help-block',
+    //     focusInvalid: false,
+    //     ignore: "",
+    //     rules: {
+    //        email: {
+    //             required: true,
+    //             email:true
+    //         },                      
+    //         ruc_ci: {
+    //             required: true
+    //         },
+    //         apellidos: {
+    //             required: true
+    //         }, 
+    //         nombres: {
+    //             required: true
+    //         },                      
+    //         telefono: {
+    //             required: true,
+    //             telefono: 'required'
+    //         },
+    //         celular: {
+    //             required: true,
+    //             celular: 'required'
+    //         },
+    //         fecha_nacimiento: {
+    //             required: true,
+    //             fecha_nacimiento: 'required'
+    //         },
+    //         genero: {
+    //             required: true
+    //         },
+    //         correo: {
+    //             required: true,
+    //             email:true
+    //         },
+    //         pais: {
+    //             required: true
+    //         },
+    //         ciudad: {
+    //             required: true
+    //         },
+    //         direccion: {
+    //             required: true
+    //         },
+    //         observaciones: {
+    //             required: true
+    //         },
+    //     },
+    //     messages: {
+    //         ruc_ci: {
+    //             required: "Este campo es requerido.",                           
+    //         },
+    //         apellidos: {
+    //             required: "Este campo es requerido.",                           
+    //         },
+    //         nombres: {
+    //             required: "Este campo es requerido.",                           
+    //         },
+    //         telefono: {
+    //             required: "Este campo es requerido",                
+    //         },     
+    //         celular: {
+    //             required: "Este campo es requerido",                
+    //         }, 
+    //         fecha_nacimiento: {
+    //             required: "Este campo es requerido",                
+    //         },     
+    //         genero: "Seleccione un género",                                           
+    //         correo: {
+    //             required: "Ingrese un correo válido.",
+    //             email: "Ingrese un correo válido.",
+    //         },  
+    //         pais: {
+    //             required: "Ingrese un país",                
+    //         },   
+    //         ciudad: {
+    //             required: "Ingrese una ciudad",                
+    //         },
+    //         direccion: {
+    //             required: "Ingrese una dirección",                
+    //         },
+    //         observaciones: {
+    //             required: "Este campo es requerido",                
+    //         },                                               
+    //     },
 
-    $('#validation-form').validate({
-        errorElement: 'div',
-        errorClass: 'help-block',
-        focusInvalid: false,
-        ignore: "",
-        rules: {
-           /* email: {
-                required: true,
-                email:true
-            },                      
-            txt_1: {
-                required: true
-            },
-            txt_2: {
-                required: true
-            }, 
-            txt_3: {
-                required: true
-            },                      
-            txt_4: {
-                required: true,
-                txt_4: 'required'
-            },
-            txt_5: {
-                required: true,
-                txt_5: 'required'
-            },
-            txt_6: {
-                required: true,
-                txt_6: 'required'
-            },
-            txt_7: {
-                required: true
-            },
-            txt_8: {
-                required: true,
-                email:true
-            },
-            txt_9: {
-                required: true
-            },
-            txt_10: {
-                required: true
-            },
-            txt_11: {
-                required: true
-            },*/
-        },
-        messages: {
-            txt_1: {
-                required: "Este campo es requerido.",                           
-            },
-            txt_2: {
-                required: "Este campo es requerido.",                           
-            },
-            txt_3: {
-                required: "Este campo es requerido.",                           
-            },
-            txt_4: {
-                required: "Este campo es requerido",                
-            },     
-            txt_5: {
-                required: "Este campo es requerido",                
-            }, 
-            txt_6: {
-                required: "Este campo es requerido",                
-            },     
-            txt_7: "Seleccione un género",                                           
-            txt_8: {
-                required: "Ingrese un correo válido.",
-                email: "Ingrese un correo válido.",
-            },  
-            txt_9: {
-                required: "Seleccione un país",                
-            },   
-            txt_10: {
-                required: "Seleccione una ciudad",                
-            },
-            txt_11: {
-                required: "Este campo es requerido",                
-            },                                               
-        },
+    //     highlight: function (e) {
+    //         $(e).closest('.form-group').removeClass('has-info').addClass('has-error');
+    //     },
 
+    //     success: function (e) {
+    //         $(e).closest('.form-group').removeClass('has-error');//.addClass('has-info');
+    //         $(e).remove();
+    //     },
 
-        highlight: function (e) {
-            $(e).closest('.form-group').removeClass('has-info').addClass('has-error');
-        },
+    //     errorPlacement: function (error, element) {         
+    //         if(element.is('input[type=checkbox]') || element.is('input[type=radio]')) {
+    //             var controls = element.closest('div[class*="col-"]');
+    //             if(controls.find(':checkbox,:radio').length > 1) controls.append(error);
+    //             else error.insertAfter(element.nextAll('.lbl:eq(0)').eq(0));                
+    //         }
+    //         else if(element.is('.select2')) {                
+    //             //console.log(element.siblings('[class*="select2-container"]:eq(0)'))
+    //             error.insertAfter(element.parent());
+    //         }
+    //         else if(element.is('.chosen-select')) {
+    //             error.insertAfter(element.siblings('[class*="chosen-container"]:eq(0)'));
+    //         }
+    //         else error.insertAfter(element.parent());
+    //     },
 
-        success: function (e) {
-            $(e).closest('.form-group').removeClass('has-error');//.addClass('has-info');
-            $(e).remove();
-        },
-
-        errorPlacement: function (error, element) {         
-            if(element.is('input[type=checkbox]') || element.is('input[type=radio]')) {
-                var controls = element.closest('div[class*="col-"]');
-                if(controls.find(':checkbox,:radio').length > 1) controls.append(error);
-                else error.insertAfter(element.nextAll('.lbl:eq(0)').eq(0));                
-            }
-            else if(element.is('.select2')) {                
-                //console.log(element.siblings('[class*="select2-container"]:eq(0)'))
-                error.insertAfter(element.parent());
-            }
-            else if(element.is('.chosen-select')) {
-                error.insertAfter(element.siblings('[class*="chosen-container"]:eq(0)'));
-            }
-            else error.insertAfter(element.parent());
-        },
-
-        submitHandler: function (form) {
-        },
-        invalidHandler: function (form) {
-        }
-    });            
+    //     submitHandler: function (form) {
+    //     },
+    //     invalidHandler: function (form) {
+    //     }
+    // });            
     $('#modal-wizard-container').ace_wizard();
     $('#modal-wizard .wizard-actions .btn[data-dismiss=modal]').removeAttr('disabled');
     
@@ -391,7 +464,6 @@ function inicio () {
             multipleSearch: false,
           },
         {
-            //view record form
             recreateForm: true,
             overlay:false,
             beforeShowForm: function(e){
@@ -404,9 +476,6 @@ function inicio () {
             form.find('input[name=sdate]').datepicker({format:'yyyy-mm-dd' , autoclose:true})
             
             form.find('input[name=stock]').addClass('ace ace-switch ace-switch-5').after('<span class="lbl"></span>');
-            //don't wrap inside a label element, the checkbox value won't be submitted (POST'ed)
-            //.addClass('ace ace-switch ace-switch-5').wrap('<label class="inline" />').after('<span class="lbl"></span>');
-
                     
             //update buttons classes
             var buttons = form.next().find('.EditButton .fm-button');
@@ -457,42 +526,10 @@ function inicio () {
             style_edit_form(form);
         }
 
-
-
-        //it causes some flicker when reloading or navigating grid
-        //it may be possible to have some custom formatter to do this as the grid is being created to prevent this
-        //or go back to default browser checkbox styles for the grid
         function styleCheckbox(table) {
-            /**
-                        $(table).find('input:checkbox').addClass('ace')
-                        .wrap('<label />')
-                        .after('<span class="lbl align-top" />')
-
-
-                        $('.ui-jqgrid-labels th[id*="_cb"]:first-child')
-                        .find('input.cbox[type=checkbox]').addClass('ace')
-                        .wrap('<label />').after('<span class="lbl align-top" />');
-             */
         }
-        
 
-        //unlike navButtons icons, action icons in rows seem to be hard-coded
-        //you can change them like this in here if you want
         function updateActionIcons(table) {
-            /**
-                        var replacement = 
-                        {
-                                'ui-ace-icon fa fa-pencil' : 'ace-icon fa fa-pencil blue',
-                                'ui-ace-icon fa fa-trash-o' : 'ace-icon fa fa-trash-o red',
-                                'ui-icon-disk' : 'ace-icon fa fa-check green',
-                                'ui-icon-cancel' : 'ace-icon fa fa-times red'
-                        };
-                        $(table).find('.ui-pg-div span.ui-icon').each(function(){
-                                var icon = $(this);
-                                var $class = $.trim(icon.attr('class').replace('ui-icon', ''));
-                                if($class in replacement) icon.attr('class', 'ui-icon '+replacement[$class]);
-                        })
-             */
         }
         
         //replace icons with FontAwesome icons like above
@@ -516,8 +553,6 @@ function inicio () {
             $('.navtable .ui-pg-button').tooltip({container:'body'});
             $(table).find('.ui-pg-div').tooltip({container:'body'});
         }
-
-        //var selr = jQuery(grid_selector).jqGrid('getGridParam','selrow');
 
         $(document).one('ajaxloadstart.page', function(e) {
             $(grid_selector).jqGrid('GridUnload');

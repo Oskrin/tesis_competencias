@@ -135,143 +135,109 @@ $cont++;
 														<form class="form-horizontal " id="validation-form" method="get">																														
 															<div class="col-md-6">																
 																<div class="form-group">
-																	<label class="control-label col-xs-3 col-sm-3 no-padding-right" for="txt_1">C.I.:</label>
+																	<label class="control-label col-xs-3 col-sm-3 no-padding-right" for="ruc_ci">Identificación:</label>
 																	<div class="col-xs-5 col-sm-5">																		
-																		<input type="text" name="txt_1" id="txt_1" class="col-xs-12 col-sm-12" />																		
+																		<input type="text" name="ruc_ci" id="ruc_ci" class="col-xs-12 col-sm-12" />																		
 																	</div>
 																</div>								                            	
 								                            </div>														
 								                            <div class="col-md-6">																
 																<div class="form-group">
-																	<label class="control-label col-xs-3 col-sm-3 no-padding-right" for="txt_2">Apellidos:</label>
+																	<label class="control-label col-xs-3 col-sm-3 no-padding-right" for="apellidos">Apellidos:</label>
 																	<div class="col-xs-5 col-sm-5">																		
-																		<input type="text" name="txt_2" id="txt_2" class="col-xs-12 col-sm-12" />																		
+																		<input type="text" name="apellidos" id="apellidos" class="col-xs-12 col-sm-12" />																		
 																	</div>
 																</div>								                            	
 								                            </div>														
 								                            <div class="col-md-6">																
 																<div class="form-group">
-																	<label class="control-label col-xs-3 col-sm-3 no-padding-right" for="txt_3">Nombres :</label>
+																	<label class="control-label col-xs-3 col-sm-3 no-padding-right" for="nombres">Nombres:</label>
 																	<div class="col-xs-5 col-sm-5">																		
-																		<input type="text" name="txt_3" id="txt_3" class="col-xs-12 col-sm-12" />																		
+																		<input type="text" name="nombres" id="nombres" class="col-xs-12 col-sm-12" />																		
 																	</div>
 																</div>								                            	
 								                            </div>			
 								                            <div class="col-md-6">																
 																<div class="form-group">
-																	<label class="control-label col-xs-3 col-sm-3 no-padding-right" for="txt_4">Teléfono:</label>
+																	<label class="control-label col-xs-3 col-sm-3 no-padding-right" for="telefono">Teléfono:</label>
 																	<div class="col-xs-5 col-sm-5">																		
-																		<input type="text" name="txt_4" id="txt_4" class="col-xs-12 col-sm-12" />																		
+																		<input type="text" name="telefono" id="telefono" class="col-xs-12 col-sm-12" />																		
 																	</div>
 																</div>								                            	
 								                            </div>		
 								                            <div class="col-md-6">																
 																<div class="form-group">
-																	<label class="control-label col-xs-3 col-sm-3 no-padding-right" for="txt_5">Celular:</label>
+																	<label class="control-label col-xs-3 col-sm-3 no-padding-right" for="celular">Celular:</label>
 																	<div class="col-xs-5 col-sm-5">																		
-																		<input type="text" name="txt_5" id="txt_5" class="col-xs-12 col-sm-12" />																		
+																		<input type="text" name="celular" id="celular" class="col-xs-12 col-sm-12" />																		
 																	</div>
 																</div>								                            	
 								                            </div>		
 								                            <div class="col-md-6">																
 																<div class="form-group">
-																	<label class="control-label col-xs-3 col-sm-3 no-padding-right" for="txt_6">F. Nacimiento:</label>
+																	<label class="control-label col-xs-3 col-sm-3 no-padding-right" for="fecha_nacimiento">F. Nacimiento:</label>
 																	<div class="col-xs-5 col-sm-5">																		
-																		<input type="text" name="txt_6" id="txt_6" class="col-xs-12 col-sm-12" />																		
+																		<input type="text" name="fecha_nacimiento" id="fecha_nacimiento" class="col-xs-12 col-sm-12" />																		
 																	</div>
 																</div>								                            	
 								                            </div>		
 								                            <div class="col-md-6">																
 																<div class="form-group">
-																	<label class="control-label col-xs-3 col-sm-3 no-padding-right" for="txt_7">Genero:</label>
+																	<label class="control-label col-xs-3 col-sm-3 no-padding-right" for="genero">Genero:</label>
 																	<div class="col-xs-5 col-sm-5">																																				
-																		<select name="txt_7" id="txt_7" class="select2" data-placeholder="Seleccione un Genero">
-																		<option value="">&nbsp;</option>
-																		<option value="M">Masculino</option>
-																		<option value="F">Femenino</option>																		
-																	</select>																		
+																		<select name="genero" id="genero" class="select2" data-placeholder="Seleccione un Genero">
+																			<option value="">&nbsp;</option>
+																			<option value="M">Masculino</option>
+																			<option value="F">Femenino</option>																		
+																		</select>																		
 																	</div>
 																</div>								                            	
 								                            </div>
 								                            <div class="col-md-6">																
 																<div class="form-group">
-																	<label class="control-label col-xs-3 col-sm-3 no-padding-right" for="txt_8">E-mail:</label>
+																	<label class="control-label col-xs-3 col-sm-3 no-padding-right" for="correo">E-mail:</label>
 																	<div class="col-xs-5 col-sm-5">																		
-																		<input type="text" name="txt_8" id="txt_8" class="col-xs-12 col-sm-12" />																		
+																		<input type="text" name="correo" id="correo" class="col-xs-12 col-sm-12" />																		
 																	</div>
 																</div>								                            	
-								                            </div>	
+								                            </div>
 								                            <div class="col-md-6">																
 																<div class="form-group">
-																	<label class="control-label col-xs-3 col-sm-3 no-padding-right" for="txt_9">País:</label>
-																	<div class="col-xs-5 col-sm-5">																																				
-																		<select name="txt_9" id="txt_9" class="select2" data-placeholder="Seleccione un País">
-																		<option value="">&nbsp;</option>
-																		
-																	</select>																																			
+																	<label class="control-label col-xs-3 col-sm-3 no-padding-right" for="pais">País:</label>
+																	<div class="col-xs-5 col-sm-5">																		
+																		<input type="text" name="pais" id="pais" class="col-xs-12 col-sm-12" />																		
+																	</div>
+																</div>								                            	
+								                            </div>
+								                            <div class="col-md-6">																
+																<div class="form-group">
+																	<label class="control-label col-xs-3 col-sm-3 no-padding-right" for="ciudad">Ciudad:</label>
+																	<div class="col-xs-5 col-sm-5">																		
+																		<input type="text" name="ciudad" id="ciudad" class="col-xs-12 col-sm-12" />																		
 																	</div>
 																</div>								                            	
 								                            </div>		
 								                            <div class="col-md-6">																
 																<div class="form-group">
-																	<label class="control-label col-xs-3 col-sm-3 no-padding-right" for="txt_10">Ciudad:</label>
-																	<div class="col-xs-5 col-sm-5">																																				
-																		<select name="txt_10" id="txt_10" class="select2" data-placeholder="Seleccione una ciudad">
-																		<option value="">&nbsp;</option>	
-																																																														
-																	</select>																		
-																	</div>
-																</div>								                            	
-								                            </div>			
-								                            <div class="col-md-6">																
-																<div class="form-group">
-																	<label class="control-label col-xs-3 col-sm-3 no-padding-right" for="txt_11">Dirección:</label>
+																	<label class="control-label col-xs-3 col-sm-3 no-padding-right" for="direccion">Dirección:</label>
 																	<div class="col-xs-5 col-sm-5">																		
-																		<input type="text" name="txt_11" id="txt_11" class="col-xs-12 col-sm-12" />																		
+																		<input type="text" name="direccion" id="direccion" class="col-xs-12 col-sm-12" />																		
 																	</div>
 																</div>								                            	
 								                            </div>		
 								                            <div class="col-md-6">																
 																<div class="form-group">
-																	<label class="control-label col-xs-3 col-sm-3 no-padding-right" for="txt_12">Observaciones:</label>
+																	<label class="control-label col-xs-3 col-sm-3 no-padding-right" for="observaciones">Observaciones:</label>
 																	<div class="col-xs-5 col-sm-5">																												
-																		<textarea type="text" name="txt_12" id="txt_12" class="col-xs-12 col-sm-12" /></textarea>	
+																		<textarea type="text" name="observaciones" id="observaciones" class="col-xs-12 col-sm-12" /></textarea>	
 																	</div>
 																</div>								                            	
 								                            </div>											                           
-								                            
 														</form>															
 													</div>
 
 													<div class="step-pane" data-step="2">														
 														<form class="form-horizontal " id="validation-form-2" method="get">	
-															<div class="col-md-4">																
-																<div class="form-group">
-																	<label class="control-label col-xs-3 col-sm-3 no-padding-right" for="txt_1">Idioma:</label>
-																	<div class="col-xs-5 col-sm-5">																		
-																		<input type="text" name="txt_idioma" id="txt_idioma"/>																		
-																	</div>
-																</div>								                            	
-								                            </div>
-
-								                            <div class="col-md-4">																
-																<div class="form-group">
-																	<label class="control-label col-xs-3 col-sm-3 no-padding-right" for="txt_1">Nivel Lectura:</label>
-																	<div class="col-xs-5 col-sm-5">																		
-																		<input type="text" name="txt_lectura" id="txt_lectura"/>																		
-																	</div>
-																</div>								                            	
-								                            </div>
-
-								                            <div class="col-md-4">																
-																<div class="form-group">
-																	<label class="control-label col-xs-3 col-sm-3 no-padding-right" for="txt_1">Nivel Escritura:</label>
-																	<div class="col-xs-5 col-sm-5">																		
-																		<input type="text" name="txt_escritura" id="txt_escritura"/>																		
-																	</div>
-																</div>								                            	
-								                            </div>
-
 															<div class="form-group">
 																<div class="row">
 																	<div class="col-xs-12">
@@ -281,7 +247,6 @@ $cont++;
 																</div>
 								                            </div>	
 														</form>
-														
 													</div>
 
 													<div class="step-pane" data-step="3">
