@@ -4,7 +4,7 @@
 
 
 	//////////////para tablas//////////
-		jQuery(function($) {
+jQuery(function($) {
 	    var grid_selector = "#grid-table";
 	    var pager_selector = "#grid-pager";
 	    
@@ -59,7 +59,7 @@
 	        },
 
 	        editurl: "idiomas.php",
-	        caption: "USUARIOS"
+	        caption: "IDIOMAS"
 	    });
 	    $(window).triggerHandler('resize.jqGrid');//cambiar el tamaño para hacer la rejilla conseguir el tamaño correcto
 
@@ -106,7 +106,7 @@
 	            style_edit_form(form);
 	        },
 	        afterSubmit: function (response){
-			if(response.responseText == 2){
+			if(response.responseText == 2) {
 	        		$.gritter.add({
 						title: 'Mensaje',
 						text: 'Registro Modificado correctamente <i class="ace-icon fa fa-spinner fa-spin green bigger-125"></i>',

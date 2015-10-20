@@ -1,0 +1,815 @@
+$(document).on("ready",inicio);
+
+
+function inicio () {
+    // valida si ya existe
+    $("#ruc_ci").keyup(function() {
+        $.ajax({
+            type: "POST",
+            url: "comparar_aspirantes.php",
+            data: "cedula=" + $("#ruc_ci").val(),
+            success: function(data) {
+                var val = data;
+                if (val == 1) {
+                    $("#ruc_ci").val("");
+                    $("#ruc_ci").focus();
+                    alert("Error... El Aspirante ya esta registrado");
+                }else{
+                    var numero = $("#ruc_ci").val();
+                    var suma = 0;      
+                    var residuo = 0;      
+                    var pri = false;      
+                    var pub = false;            
+                    var nat = false;                     
+                    var modulo = 11;
+                    var p1;
+                    var p2;
+                    var p3;
+                    var p4;
+                    var p5;
+                    var p6;
+                    var p7;
+                    var p8;            
+                    var p9; 
+                    var d1  = numero.substr(0,1);         
+                    var d2  = numero.substr(1,1);         
+                    var d3  = numero.substr(2,1);         
+                    var d4  = numero.substr(3,1);         
+                    var d5  = numero.substr(4,1);         
+                    var d6  = numero.substr(5,1);         
+                    var d7  = numero.substr(6,1);         
+                    var d8  = numero.substr(7,1);         
+                    var d9  = numero.substr(8,1);         
+                    var d10 = numero.substr(9,1);  
+
+                    if (d3 < 6){           
+                        nat = true;            
+                        p1 = d1 * 2;
+                        if (p1 >= 10) p1 -= 9;
+                        p2 = d2 * 1;
+                        if (p2 >= 10) p2 -= 9;
+                        p3 = d3 * 2;
+                        if (p3 >= 10) p3 -= 9;
+                        p4 = d4 * 1;
+                        if (p4 >= 10) p4 -= 9;
+                        p5 = d5 * 2;
+                        if (p5 >= 10) p5 -= 9;
+                        p6 = d6 * 1;
+                        if (p6 >= 10) p6 -= 9; 
+                        p7 = d7 * 2;
+                        if (p7 >= 10) p7 -= 9;
+                        p8 = d8 * 1;
+                        if (p8 >= 10) p8 -= 9;
+                        p9 = d9 * 2;
+                        if (p9 >= 10) p9 -= 9;             
+                        modulo = 10;
+                    } else if(d3 == 6){           
+                        pub = true;             
+                        p1 = d1 * 3;
+                        p2 = d2 * 2;
+                        p3 = d3 * 7;
+                        p4 = d4 * 6;
+                        p5 = d5 * 5;
+                        p6 = d6 * 4;
+                        p7 = d7 * 3;
+                        p8 = d8 * 2;            
+                        p9 = 0;            
+                    } else if(d3 == 9) {          
+                        pri = true;                                   
+                        p1 = d1 * 4;
+                        p2 = d2 * 3;
+                        p3 = d3 * 2;
+                        p4 = d4 * 7;
+                        p5 = d5 * 6;
+                        p6 = d6 * 5;
+                        p7 = d7 * 4;
+                        p8 = d8 * 3;
+                        p9 = d9 * 2;            
+                    }
+                
+                    suma = p1 + p2 + p3 + p4 + p5 + p6 + p7 + p8 + p9;                
+                    residuo = suma % modulo;                                         
+
+                    var digitoVerificador = residuo==0 ? 0: modulo - residuo; 
+                    ////////////verificamos validacioncedula////////////////////
+                    if (numero.length === 10) {
+                        if(nat == true){
+                            if (digitoVerificador != d10){                          
+                                alert('El número de cédula es incorrecto.');
+                                $("#ruc_ci").val("");
+                            }else{
+                                alert('El número de cédula es correcto.');
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    });
+    // fin
+
+      carga_idiomas("idioma");
+
+
+    $('[data-rel=tooltip]').tooltip();
+
+    $('#fecha_nacimiento').datepicker({
+        autoclose: true,
+        format:'yyyy-mm-dd',
+        startView:0     
+    });   
+         
+    $(".select2").css('width','200px').select2({allowClear:true})
+    .on('change', function(){
+        $(this).closest('form').validate().element($(this));
+    }); 
+    var $validation = true;
+    $('#fuelux-wizard-container')
+    .ace_wizard({
+        //step: 2 //optional argument. wizard will jump to step "2" at first
+        //buttons: '.wizard-actions:eq(0)'
+    })
+    .on('actionclicked.fu.wizard' , function(e, info){
+        if(info.step == 1 && $validation) {
+            if(!$('#validation-form').valid()) e.preventDefault();
+        }
+    })
+    .on('finished.fu.wizard', function(e) {
+        bootbox.dialog({
+            message: "Thank you! Your information was successfully saved!", 
+            buttons: {
+                "success" : {
+                    "label" : "OK",
+                    "className" : "btn-sm btn-primary"
+                }
+            }
+        });
+    }).on('stepclick.fu.wizard', function(e){
+        //e.preventDefault();//this will prevent clicking and selecting steps
+    });
+
+    $.mask.definitions['~']='[+-]';
+    $('#telefono').mask('(999) 999-999');
+    $('#celular').mask('(99) 9999-9999');
+    $('#fecha_nacimiento').mask('9999-99-99');
+
+    jQuery.validator.addMethod("telefono", function (value, element) {
+        return this.optional(element) || /^\(\d{3}\) \d{3}\-\d{3}( x\d{1,6})?$/.test(value);
+    }, "Ingrese un número válido");
+
+    jQuery.validator.addMethod("celular", function (value, element) {
+        return this.optional(element) || /^\(\d{2}\) \d{4}\-\d{4}( x\d{1,6})?$/.test(value);
+    }, "Ingrese un número válido");
+
+    jQuery.validator.addMethod("fecha_nacimiento", function (value, element) {
+        return this.optional(element) || /^\d{4}\-\d{2}\-\d{2}( x\d{1,6})?$/.test(value);
+    }, "Ingrese un fecha válida");
+
+    $('#validation-form').validate({
+        errorElement: 'div',
+        errorClass: 'help-block',
+        focusInvalid: false,
+        ignore: "",
+        rules: {
+           email: {
+                required: true,
+                email:true
+            },                      
+            id: {
+                required: true
+            },
+            apellidos: {
+                required: true
+            }, 
+            nombres: {
+                required: true
+            },                      
+            telefono: {
+                required: true,
+                telefono: 'required'
+            },
+            celular: {
+                required: true,
+                celular: 'required'
+            },
+            fecha_nacimiento: {
+                required: true,
+                fecha_nacimiento: 'required'
+            },
+            genero: {
+                required: true
+            },
+            correo: {
+                required: true,
+                email:true
+            },
+            pais: {
+                required: true
+            },
+            ciudad: {
+                required: true
+            },
+            direccion: {
+                required: true
+            },
+            observaciones: {
+                required: true
+            },
+        },
+        // messages: {
+        //     ruc_ci: {
+        //         required: "Este campo es requerido.",                           
+        //     },
+        //     apellidos: {
+        //         required: "Este campo es requerido.",                           
+        //     },
+        //     nombres: {
+        //         required: "Este campo es requerido.",                           
+        //     },
+        //     telefono: {
+        //         required: "Este campo es requerido",                
+        //     },     
+        //     celular: {
+        //         required: "Este campo es requerido",                
+        //     }, 
+        //     fecha_nacimiento: {
+        //         required: "Este campo es requerido",                
+        //     },     
+        //     genero: "Seleccione un género",                                           
+        //     correo: {
+        //         required: "Ingrese un correo válido.",
+        //         email: "Ingrese un correo válido.",
+        //     },  
+        //     pais: {
+        //         required: "Ingrese un país",                
+        //     },   
+        //     ciudad: {
+        //         required: "Ingrese una ciudad",                
+        //     },
+        //     direccion: {
+        //         required: "Ingrese una dirección",                
+        //     },
+        //     observaciones: {
+        //         required: "Este campo es requerido",                
+        //     },                                               
+        // },
+
+        highlight: function (e) {
+            $(e).closest('.form-group').removeClass('has-info').addClass('has-error');
+        },
+
+        success: function (e) {
+            $(e).closest('.form-group').removeClass('has-error');//.addClass('has-info');
+            $(e).remove();
+        },
+
+        errorPlacement: function (error, element) {         
+            if(element.is('input[type=checkbox]') || element.is('input[type=radio]')) {
+                var controls = element.closest('div[class*="col-"]');
+                if(controls.find(':checkbox,:radio').length > 1) controls.append(error);
+                else error.insertAfter(element.nextAll('.lbl:eq(0)').eq(0));                
+            }
+            else if(element.is('.select2')) {                
+                error.insertAfter(element.parent());
+            }
+            else if(element.is('.chosen-select')) {
+                error.insertAfter(element.siblings('[class*="chosen-container"]:eq(0)'));
+            }
+            else error.insertAfter(element.parent());
+        },
+
+        submitHandler: function (form) {
+        },
+        invalidHandler: function (form) {
+        }
+    });            
+    $('#modal-wizard-container').ace_wizard();
+    $('#modal-wizard .wizard-actions .btn[data-dismiss=modal]').removeAttr('disabled');
+     
+    $(document).one('ajaxloadstart.page', function(e) {
+        $('[class*=select2]').remove();
+    });
+
+    jQuery(function($) {
+        var grid_selector = "#table_aspi";
+        var pager_selector = "#pager_aspi";
+        
+        //cambiar el tamaño para ajustarse al tamaño de la página
+        $(window).on('resize.jqGrid', function () {      
+            $(grid_selector).jqGrid( 'setGridWidth', $("#myModal .modal-dialog").width()-30);
+        })
+
+        //cambiar el tamaño de la barra lateral collapse/expand
+        var parent_column = $(grid_selector).closest('[class*="col-"]');
+        $(document).on('settings.ace.jqGrid' , function(ev, event_name, collapsed) {
+            if( event_name === 'sidebar_collapsed' || event_name === 'main_container_fixed' ) {
+                //para dar tiempo a los cambios de DOM y luego volver a dibujar!!!
+                setTimeout(function() {
+                    $(grid_selector).jqGrid( 'setGridWidth', parent_column.width() );
+                }, 0);
+            }
+        })
+
+        jQuery(grid_selector).jqGrid({          
+            datatype: "xml",
+            url: 'xmlAspirante.php',        
+            colNames: ['ID','IDENTIFICACIÓN','NOMBRES','APELLIDOS','TELÉFONO','CELULAR','FECHA NACIMIENTO','GENERO','CORREO','DIRECCIÓN','FOTO'],
+            colModel:[      
+                {name:'id_aspirante',index:'id_aspirante',frozen:true,align:'left',search:false},
+                {name:'ruc_ci',index:'ruc_ci',frozen : true,align:'left',search:true},
+                {name:'nombres_aspirantes',index:'nombres_aspirantes',frozen : true,align:'left',search:true},
+                {name:'apellidos_aspirantes',index:'apellidos_aspirantes',frozen : true,align:'left',search:true},
+                {name:'telf_aspirante',index:'telf_aspirante',frozen : true,align:'left',search:false},            
+                {name:'movil_aspirante',index:'movil_aspirante',frozen : true,align:'left',search:false},
+                {name:'fnac_aspirante',index:'fnac_aspirante',frozen : true,align:'left',search:false},             
+                {name:'genero_aspirante',index:'genero_aspirante',frozen : true,align:'left',search:false},
+                {name:'mail_aspirante',index:'mail_aspirante',frozen : true,align:'left',search:false},
+                {name:'direccion_aspirante',index:'direccion_aspirante',frozen : true,align:'left',search:false},
+                {name:'imagen',index:'imagen',frozen : true,align:'left',search:false},
+            ],          
+            rowNum: 10,       
+            width:600,
+            shrinkToFit: false,
+            height:200,
+            rowList: [10,20,30],
+            pager: pager_selector,        
+            sortname: 'id_aspirante',
+            sortorder: 'asc',
+            caption: 'LISTA DE ASPIRANTES',         
+            altRows: true,
+            multiselect: false,
+            multiboxonly: true,
+            viewrecords : true,
+            loadComplete : function() {
+                var table = this;
+                setTimeout(function(){
+                    styleCheckbox(table);
+                    updateActionIcons(table);
+                    updatePagerIcons(table);
+                    enableTooltips(table);
+                }, 0);
+            },
+            ondblClickRow: function(rowid) { 
+                var gsr = jQuery(grid_selector).jqGrid('getGridParam','selrow');                                              
+                var ret = jQuery(grid_selector).jqGrid('getRowData',gsr);
+                $("#id span").remove();
+                $("#nombres span").remove();
+                $("#apellidos span").remove();
+                $("#identificacion span").remove();
+                $("#telefono span").remove();
+                $("#celular span").remove();
+                $("#correo span").remove();
+                $("#direccion span").remove();
+
+                $("#id").append($("<span>").text(ret.id_aspirante));
+                $("#nombres").append($("<span>").text(ret.nombres_aspirantes));
+                $("#apellidos").append($("<span>").text(ret.apellidos_aspirantes));
+                $("#identificacion").append($("<span>").text(ret.ruc_ci));
+                $("#telefono").append($("<span>").text(ret.telf_aspirante));
+                $("#celular").append($("<span>").text(ret.movil_aspirante));
+                $("#correo").append($("<span>").text(ret.mail_aspirante));
+                $("#direccion").append($("<span>").text(ret.direccion_aspirante));
+                $("#avatar2").attr("src", "fotos/"+ ret.imagen);
+
+                $('#myModal').modal('hide');
+                $("#btn_Guardar").attr("disabled", true);
+                // $("#btn_0").append("<span class='glyphicon glyphicon-log-in'></span> Modificar");                    
+            },
+            editurl: "idiomas.php",
+            caption: "LISTA ASPIRANTES"
+        });
+        $(window).triggerHandler('resize.jqGrid');//cambiar el tamaño para hacer la rejilla conseguir el tamaño correcto
+
+        function aceSwitch( cellvalue, options, cell ) {
+            setTimeout(function(){
+                $(cell) .find('input[type=checkbox]')
+                .addClass('ace ace-switch ace-switch-5')
+                .after('<span class="lbl"></span>');
+            }, 0);
+        }              
+        //navButtons
+        jQuery(grid_selector).jqGrid('navGrid',pager_selector,
+        {   //navbar options
+            edit: false,
+            editicon : 'ace-icon fa fa-pencil blue',
+            add: false,
+            addicon : 'ace-icon fa fa-plus-circle purple',
+            del: false,
+            delicon : 'ace-icon fa fa-trash-o red',
+            search: true,
+            searchicon : 'ace-icon fa fa-search orange',
+            refresh: true,
+            refreshicon : 'ace-icon fa fa-refresh green',
+            view: true,
+            viewicon : 'ace-icon fa fa-search-plus grey'
+        },
+        {           
+            recreateForm: true,
+            beforeShowForm : function(e) {
+                var form = $(e[0]);
+                form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
+                style_edit_form(form);
+            }
+        },
+        {
+            closeAfterAdd: true,
+            recreateForm: true,
+            viewPagerButtons: false,
+            beforeShowForm : function(e) {
+                var form = $(e[0]);
+                form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar')
+                .wrapInner('<div class="widget-header" />')
+                style_edit_form(form);
+            }
+        },
+        {
+            //delete record form
+            recreateForm: true,
+            beforeShowForm : function(e) {
+                var form = $(e[0]);
+                if(form.data('styled')) return false;
+                    
+                form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
+                style_delete_form(form);
+                    
+                form.data('styled', true);
+            },
+            onClick : function(e) {
+                //alert(1);
+            }
+        },
+        {
+              recreateForm: true,
+            afterShowSearch: function(e){
+                var form = $(e[0]);
+                form.closest('.ui-jqdialog').find('.ui-jqdialog-title').wrap('<div class="widget-header" />')
+                style_search_form(form);
+            },
+            afterRedraw: function(){
+                style_search_filters($(this));
+            }
+            ,
+            //multipleSearch: true
+            overlay: false,
+            sopt: ['eq', 'cn'],
+            defaultSearch: 'eq',                       
+          },
+        {
+            //view record form
+            recreateForm: true,
+            beforeShowForm: function(e){
+                var form = $(e[0]);
+                form.closest('.ui-jqdialog').find('.ui-jqdialog-title').wrap('<div class="widget-header" />')
+            }
+        })      
+        function style_edit_form(form) {
+            //enable datepicker on "sdate" field and switches for "stock" field
+            form.find('input[name=sdate]').datepicker({format:'yyyy-mm-dd' , autoclose:true})
+            
+            form.find('input[name=stock]').addClass('ace ace-switch ace-switch-5').after('<span class="lbl"></span>');
+
+            //update buttons classes
+            var buttons = form.next().find('.EditButton .fm-button');
+            buttons.addClass('btn btn-sm').find('[class*="-icon"]').hide();//ui-icon, s-icon
+            buttons.eq(0).addClass('btn-primary').prepend('<i class="ace-icon fa fa-check"></i>');
+            buttons.eq(1).prepend('<i class="ace-icon fa fa-times"></i>')
+            
+            buttons = form.next().find('.navButton a');
+            buttons.find('.ui-icon').hide();
+            buttons.eq(0).append('<i class="ace-icon fa fa-chevron-left"></i>');
+            buttons.eq(1).append('<i class="ace-icon fa fa-chevron-right"></i>');       
+        }
+
+        function style_delete_form(form) {
+            var buttons = form.next().find('.EditButton .fm-button');
+            buttons.addClass('btn btn-sm btn-white btn-round').find('[class*="-icon"]').hide();//ui-icon, s-icon
+            buttons.eq(0).addClass('btn-danger').prepend('<i class="ace-icon fa fa-trash-o"></i>');
+            buttons.eq(1).addClass('btn-default').prepend('<i class="ace-icon fa fa-times"></i>')
+        }
+        
+        function style_search_filters(form) {
+            form.find('.delete-rule').val('X');
+            form.find('.add-rule').addClass('btn btn-xs btn-primary');
+            form.find('.add-group').addClass('btn btn-xs btn-success');
+            form.find('.delete-group').addClass('btn btn-xs btn-danger');
+        }
+        function style_search_form(form) {
+            var dialog = form.closest('.ui-jqdialog');
+            var buttons = dialog.find('.EditTable')
+            buttons.find('.EditButton a[id*="_reset"]').addClass('btn btn-sm btn-info').find('.ui-icon').attr('class', 'ace-icon fa fa-retweet');
+            buttons.find('.EditButton a[id*="_query"]').addClass('btn btn-sm btn-inverse').find('.ui-icon').attr('class', 'ace-icon fa fa-comment-o');
+            buttons.find('.EditButton a[id*="_search"]').addClass('btn btn-sm btn-purple').find('.ui-icon').attr('class', 'ace-icon fa fa-search');
+        }
+        
+        function beforeDeleteCallback(e) {
+            var form = $(e[0]);
+            if(form.data('styled')) return false;
+            
+            form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
+            style_delete_form(form);
+            
+            form.data('styled', true);
+        }
+        
+        function beforeEditCallback(e) {
+            var form = $(e[0]);
+            form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
+            style_edit_form(form);
+        }
+
+        function styleCheckbox(table) {
+        }
+
+        function updateActionIcons(table) {
+        }
+        
+        function updatePagerIcons(table) {
+            var replacement = 
+                {
+                'ui-icon-seek-first' : 'ace-icon fa fa-angle-double-left bigger-140',
+                'ui-icon-seek-prev' : 'ace-icon fa fa-angle-left bigger-140',
+                'ui-icon-seek-next' : 'ace-icon fa fa-angle-right bigger-140',
+                'ui-icon-seek-end' : 'ace-icon fa fa-angle-double-right bigger-140'
+            };
+            $('.ui-pg-table:not(.navtable) > tbody > tr > .ui-pg-button > .ui-icon').each(function(){
+                var icon = $(this);
+                var $class = $.trim(icon.attr('class').replace('ui-icon', ''));
+                
+                if($class in replacement) icon.attr('class', 'ui-icon '+replacement[$class]);
+            })
+        }
+
+        function enableTooltips(table) {
+            $('.navtable .ui-pg-button').tooltip({container:'body'});
+            $(table).find('.ui-pg-div').tooltip({container:'body'});
+        }
+
+        $(document).one('ajaxloadstart.page', function(e) {
+            $(grid_selector).jqGrid('GridUnload');
+            $('.ui-jqdialog').remove();
+        });
+    });
+
+    jQuery(function($) {
+        var grid_selector = "#grid-table";
+        var pager_selector = "#grid-pager";
+        
+        //cambiar el tamaño para ajustarse al tamaño de la página
+        $(window).on('resize.jqGrid', function () {
+            $(grid_selector).jqGrid( 'setGridWidth', $(".page-content").width() );
+        })
+        //cambiar el tamaño de la barra lateral collapse/expand
+        var parent_column = $(grid_selector).closest('[class*="col-"]');
+        $(document).on('settings.ace.jqGrid' , function(ev, event_name, collapsed) {
+            if( event_name === 'sidebar_collapsed' || event_name === 'main_container_fixed' ) {
+                //para dar tiempo a los cambios de DOM y luego volver a dibujar!!!
+                setTimeout(function() {
+                    $(grid_selector).jqGrid( 'setGridWidth', parent_column.width() );
+                }, 0);
+            }
+        })
+
+        jQuery(grid_selector).jqGrid({         
+            url: 'xmlIdiomas.php',
+            datatype: "xml",
+            height: 250,
+            colNames:['ID','NOMBRE IDIOMA','NIVEL LECTURA','NIVEL ESCRITURA','FECHA CREACIÓN'],
+            colModel:[
+                {name:'id_idioma',index:'id_idioma', width:60, sorttype:"int", editable: true, hidden: true, editoptions: {readonly: 'readonly'}},
+                {name:'nombre_idioma',index:'nombre_idioma', width:150,editable: true,editoptions:{size:"20"}, editrules: {required: true}},                
+                {name:'nivel_lectura',index:'nivel_lectura', width:150,editable: true,editoptions:{size:"20"}, editrules: {required: true},edittype:"select",editoptions:{value:"Básico:Básico;Intermedio:Intermedio;Experto:Experto"}},
+                {name:'nivel_escritura',index:'nivel_escritura', width:150,editable: true,editoptions:{size:"20"}, editrules: {required: true},edittype:"select",editoptions:{value:"Básico:Básico;Intermedio:Intermedio;Experto:Experto"}},
+                {name:'fecha_creacion',index:'fecha_creacion', width:150, editable: true, editoptions:{size:"20",maxlength:"30",readonly: 'readonly'}, editrules: {required: false}},
+            ], 
+            rowNum:10,
+            rowList:[10,20,30],
+            pager : pager_selector,
+            sortname: 'id_idioma',
+            sortorder: 'asc',
+            altRows: true,
+            multiselect: false,
+            multiboxonly: false,
+            viewrecords : true,
+            loadComplete : function() {
+                var table = this;
+                setTimeout(function(){
+                    styleCheckbox(table);
+                    updateActionIcons(table);
+                    updatePagerIcons(table);
+                    enableTooltips(table);
+                }, 0);
+            },
+
+            editurl: "idiomas.php",
+            caption: "IDIOMAS"
+        });
+        $(window).triggerHandler('resize.jqGrid');//cambiar el tamaño para hacer la rejilla conseguir el tamaño correcto
+
+        function aceSwitch( cellvalue, options, cell ) {
+            setTimeout(function(){
+                $(cell) .find('input[type=checkbox]')
+                .addClass('ace ace-switch ace-switch-5')
+                .after('<span class="lbl"></span>');
+            }, 0);
+        }
+        //enable datepicker
+        function pickDate( cellvalue, options, cell ) {
+            setTimeout(function(){
+                $(cell) .find('input[type=text]')
+                .datepicker({format:'yyyy-mm-dd' , autoclose:true}); 
+            }, 0);
+        }
+
+        //navButtons
+        jQuery(grid_selector).jqGrid('navGrid',pager_selector,
+        {   //navbar options
+            edit: true,
+            editicon : 'ace-icon fa fa-pencil blue',
+            add: true,
+            addicon : 'ace-icon fa fa-plus-circle purple',
+            del: false,
+            delicon : 'ace-icon fa fa-trash-o red',
+            search: true,
+            searchicon : 'ace-icon fa fa-search orange',
+            refresh: true,
+            refreshicon : 'ace-icon fa fa-refresh green',
+            view: true,
+            viewicon : 'ace-icon fa fa-search-plus grey'
+        },
+        {
+            closeAfterEdit: true,
+            recreateForm: true,
+            viewPagerButtons: false,
+            overlay:false,
+            beforeShowForm : function(e) {
+                var form = $(e[0]);
+                form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
+                style_edit_form(form);
+            },
+            // afterSubmit: function (response) {
+            // if(response.responseText == 2) {
+            //         $.gritter.add({
+            //             title: 'Mensaje',
+            //             text: 'Registro Modificado correctamente <i class="ace-icon fa fa-spinner fa-spin green bigger-125"></i>',
+            //             time: 1000              
+            //         });
+            //         return true;
+            //     } else {
+            //         if(response.responseText == 3) { 
+            //             $("#nombre_idioma").val("");
+            //             return [false,"Error.. El idioma ya existe"];
+            //         }   
+            //     }
+            // },
+        },
+        {
+            closeAfterAdd: true,
+            recreateForm: true,
+            viewPagerButtons: false,
+            overlay:false,
+            beforeShowForm : function(e) {
+                var form = $(e[0]);
+                form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
+                style_edit_form(form);
+            },
+            // afterSubmit: function (response) {
+            // if(response.responseText == 1) {
+            //         $.gritter.add({
+            //             title: 'Mensaje',
+            //             text: 'Registro Modificado correctamente <i class="ace-icon fa fa-spinner fa-spin green bigger-125"></i>',
+            //             time: 1000              
+            //         });
+            //         return true;
+            //     } else {
+            //         if(response.responseText == 3) { 
+            //             $("#nombre_idioma").val("");
+            //             return [false,"Error.. El idioma ya existe"];
+            //         }   
+            //     }
+            // },
+        },
+        {
+            //delete record form
+            recreateForm: true,
+            overlay:false,
+            beforeShowForm : function(e) {
+                var form = $(e[0]);
+                if(form.data('styled')) return false;
+                form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
+                style_delete_form(form);
+                form.data('styled', true);
+            },
+            onClick : function(e) {
+                //alert(1);
+            }
+        },
+        {
+              recreateForm: true,
+              overlay:false,
+            afterShowSearch: function(e) {
+                var form = $(e[0]);
+                form.closest('.ui-jqdialog').find('.ui-jqdialog-title').wrap('<div class="widget-header" />')
+                style_search_form(form);
+            },
+            afterRedraw: function(){
+                style_search_filters($(this));
+            }
+            ,
+            multipleSearch: false,
+          },
+        {
+            //view record form
+            recreateForm: true,
+            overlay:false,
+            beforeShowForm: function(e){
+                var form = $(e[0]);
+                form.closest('.ui-jqdialog').find('.ui-jqdialog-title').wrap('<div class="widget-header" />')
+            }
+        }
+    )
+
+    function style_edit_form(form) {
+        form.find('input[name=sdate]').datepicker({format:'yyyy-mm-dd' , autoclose:true})
+        form.find('input[name=stock]').addClass('ace ace-switch ace-switch-5').after('<span class="lbl"></span>');
+        var buttons = form.next().find('.EditButton .fm-button');
+        buttons.addClass('btn btn-sm').find('[class*="-icon"]').hide();//ui-icon, s-icon
+        buttons.eq(0).addClass('btn-primary').prepend('<i class="ace-icon fa fa-check"></i>');
+        buttons.eq(1).prepend('<i class="ace-icon fa fa-times"></i>')
+        
+        buttons = form.next().find('.navButton a');
+        buttons.find('.ui-icon').hide();
+        buttons.eq(0).append('<i class="ace-icon fa fa-chevron-left"></i>');
+        buttons.eq(1).append('<i class="ace-icon fa fa-chevron-right"></i>');       
+    }
+
+    function style_delete_form(form) {
+        var buttons = form.next().find('.EditButton .fm-button');
+        buttons.addClass('btn btn-sm btn-white btn-round').find('[class*="-icon"]').hide();//ui-icon, s-icon
+        buttons.eq(0).addClass('btn-danger').prepend('<i class="ace-icon fa fa-trash-o"></i>');
+        buttons.eq(1).addClass('btn-default').prepend('<i class="ace-icon fa fa-times"></i>')
+    }
+        
+    function style_search_filters(form) {
+        form.find('.delete-rule').val('X');
+        form.find('.add-rule').addClass('btn btn-xs btn-primary');
+        form.find('.add-group').addClass('btn btn-xs btn-success');
+        form.find('.delete-group').addClass('btn btn-xs btn-danger');
+    }
+
+    function style_search_form(form) {
+        var dialog = form.closest('.ui-jqdialog');
+        var buttons = dialog.find('.EditTable')
+        buttons.find('.EditButton a[id*="_reset"]').addClass('btn btn-sm btn-info').find('.ui-icon').attr('class', 'ace-icon fa fa-retweet');
+        buttons.find('.EditButton a[id*="_query"]').addClass('btn btn-sm btn-inverse').find('.ui-icon').attr('class', 'ace-icon fa fa-comment-o');
+        buttons.find('.EditButton a[id*="_search"]').addClass('btn btn-sm btn-purple').find('.ui-icon').attr('class', 'ace-icon fa fa-search');
+    }
+        
+    function beforeDeleteCallback(e) {
+        var form = $(e[0]);
+        if(form.data('styled')) return false;
+        
+        form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
+        style_delete_form(form);
+        
+        form.data('styled', true);
+    }
+        
+    function beforeEditCallback(e) {
+        var form = $(e[0]);
+        form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
+        style_edit_form(form);
+    }
+    function styleCheckbox(table) {
+    }
+    function updateActionIcons(table) {
+    }
+        
+    function updatePagerIcons(table) {
+        var replacement = 
+            {
+            'ui-icon-seek-first' : 'ace-icon fa fa-angle-double-left bigger-140',
+            'ui-icon-seek-prev' : 'ace-icon fa fa-angle-left bigger-140',
+            'ui-icon-seek-next' : 'ace-icon fa fa-angle-right bigger-140',
+            'ui-icon-seek-end' : 'ace-icon fa fa-angle-double-right bigger-140'
+        };
+        $('.ui-pg-table:not(.navtable) > tbody > tr > .ui-pg-button > .ui-icon').each(function(){
+            var icon = $(this);
+            var $class = $.trim(icon.attr('class').replace('ui-icon', ''));
+            
+            if($class in replacement) icon.attr('class', 'ui-icon '+replacement[$class]);
+        })
+    }
+
+    function enableTooltips(table) {
+        $('.navtable .ui-pg-button').tooltip({container:'body'});
+        $(table).find('.ui-pg-div').tooltip({container:'body'});
+    }
+
+        //var selr = jQuery(grid_selector).jqGrid('getGridParam','selrow');
+
+        $(document).one('ajaxloadstart.page', function(e) {
+            $(grid_selector).jqGrid('GridUnload');
+            $('.ui-jqdialog').remove();
+        });
+    });
+}
