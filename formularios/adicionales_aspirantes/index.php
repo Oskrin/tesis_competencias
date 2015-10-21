@@ -2,15 +2,6 @@
  include('../menu/index.php'); 
  include '../conexion.php';
  $conexion = conectarse();
-
- /////////////contador aspirantes//////////
-$consulta = pg_query("select max(id_aspirante) from aspirantes");
-while ($row = pg_fetch_row($consulta)) {
-    $cont = $row[0];
-}
-$cont++;
-////////////////////////////////////////
-
  ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -149,13 +140,7 @@ $cont++;
 
 																<div class="col-xs-12 col-sm-9">
 																	<div class="profile-user-info">
-																		<div class="profile-info-row">
-																			<div class="profile-info-name"> Id: </div>
-
-																			<div class="profile-info-value">
-																				<span id="id"></span>
-																			</div>
-																		</div>
+																		<input type="text" id="id_aspirante" name="id_aspirante"  class="form-control"/>
 
 																		<div class="profile-info-row">
 																			<div class="profile-info-name"> Nombres: </div>
@@ -222,28 +207,46 @@ $cont++;
 
 													<div class="step-pane" data-step="2">														
 														<form class="form-horizontal " id="validation-form-2" method="get">	
-															<div class="form-group">
-																<div class="row">
-																	<div class="col-xs-12">
-																		<table id="grid-table"></table>
-											                            <div id="grid-pager"></div>
-										                            </div>								
-																</div>
-								                            </div>	
+															<div class="row">
+																<div class="col-xs-12">
+																	<table id="table_idioma"></table>
+										                            <div id="pager_idioma"></div>
+										                        </div>    
+															</div> 
 														</form>
 													</div>
 
 													<div class="step-pane" data-step="3">
-														<div class="center">
-															<h3 class="blue lighter">This is step 3</h3>
-														</div>
+														<form class="form-horizontal " id="validation-form-3" method="get">
+															<div class="row">
+																<div class="col-xs-12">
+																	<table id="table_proyectos"></table>
+										                            <div id="pager_proyectos"></div>
+										                        </div>	
+															</div>	
+														</form>
 													</div>
 
 													<div class="step-pane" data-step="4">
-														<div class="center">
-															<h3 class="green">Congrats!</h3>
-															Your product is ready to ship! Click finish to continue!
-														</div>
+														<form class="form-horizontal " id="validation-form-4" method="get">
+															<div class="row">
+																<div class="col-xs-12">
+																	<table id="table_cursos"></table>
+										                            <div id="pager_cursos"></div>
+										                        </div>	
+															</div>	
+														</form>
+													</div>
+
+													<div class="step-pane" data-step="5">
+														<form class="form-horizontal " id="validation-form-4" method="get">
+															<div class="row">
+																<div class="col-xs-12">
+																	<table id="table_ponencias"></table>
+										                            <div id="pager_ponencias"></div>
+										                        </div>	
+															</div>	
+														</form>
 													</div>
 												</div>
 											</div>

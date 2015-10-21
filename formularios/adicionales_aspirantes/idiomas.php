@@ -27,17 +27,17 @@ if ($_POST['oper'] == "add") {
     }
     $cont++;
 
-    $sql = "insert into idiomas values ('$cont','" . strtoupper($_POST['nombre_idioma']) . "','". $_POST['nivel_lectura']. "','". $_POST['nivel_escritura']. "','1','$fecha','1')";
+    $sql = "insert into idiomas values ('$cont','" .strtoupper($_POST['nombre_idioma']). "','" .$_POST['nivel_lectura']. "','" .$_POST['nivel_escritura']. "','1','$fecha')";
     $guardar = guardarSql($conexion, $sql);
     pg_query("insert into auditoria values('$id_auditoria','$id_user','$fecha','" .'Se creó un nuevo Idioma : '.strtoupper($_POST['nombre_idioma']). "','Idiomas','$cliente','$cont')");
     $data = "1";//guardado
      
 } else {
     if ($_POST['oper'] == "edit") {
-        $sql = "update idiomas set nombre_idioma = '" . strtoupper($_POST['nombre_idioma']) . "', nivel_lectura = '". $_POST['nivel_lectura']. "', nivel_escritura = '". $_POST['nivel_escritura']. "', fecha_creacion = '$fecha' where id_idioma = '$_POST[id_idioma]'";
+        $sql = "update idiomas set nombre_idioma = '" .strtoupper($_POST['nombre_idioma']). "', nivel_lectura = '" .$_POST['nivel_lectura']. "', nivel_escritura = '" .$_POST['nivel_escritura']. "', fecha_creacion = '$fecha' where id_idioma = '$_POST[id_idioma]'";
         $guardar = guardarSql($conexion, $sql);
         pg_query("insert into auditoria values('$id_auditoria','$id_user','$fecha','" .'Se Modificó un Idioma : '.strtoupper($_POST['nombre_idioma']). "','Idiomas','$cliente','$_POST[id_idioma]')");
-        $data = "2";
+        $data = "2";//modificado
     }
 }
 
