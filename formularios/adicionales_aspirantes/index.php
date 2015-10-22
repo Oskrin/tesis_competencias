@@ -239,11 +239,55 @@
 													</div>
 
 													<div class="step-pane" data-step="5">
-														<form class="form-horizontal " id="validation-form-4" method="get">
+														<form class="form-horizontal " id="validation-form-5" method="get">
 															<div class="row">
 																<div class="col-xs-12">
 																	<table id="table_ponencias"></table>
 										                            <div id="pager_ponencias"></div>
+										                        </div>	
+															</div>	
+														</form>
+													</div>
+
+													<div class="step-pane" data-step="6">
+														<form class="form-horizontal " id="validation-form-6" method="get">
+															<div class="row">
+																<div class="col-xs-12">
+																	<table id="table_premios"></table>
+										                            <div id="pager_premios"></div>
+										                        </div>	
+															</div>	
+														</form>
+													</div>
+
+													<div class="step-pane" data-step="7">
+														<form class="form-horizontal " id="validation-form-7" method="get">
+															<div class="row">
+																<div class="col-xs-12">
+																	<table id="table_publicaciones"></table>
+										                            <div id="pager_publicaciones"></div>
+										                        </div>	
+															</div>	
+														</form>
+													</div>
+
+													<div class="step-pane" data-step="8">
+														<form class="form-horizontal " id="validation-form-8" method="get">
+															<div class="row">
+																<div class="col-xs-12">
+																	<table id="table_experiencia"></table>
+										                            <div id="pager_experiencia"></div>
+										                        </div>	
+															</div>	
+														</form>
+													</div>
+
+													<div class="step-pane" data-step="9">
+														<form class="form-horizontal " id="validation-form-9" method="get">
+															<div class="row">
+																<div class="col-xs-12">
+																	<table id="table_titulos"></table>
+										                            <div id="pager_titulos"></div>
 										                        </div>	
 															</div>	
 														</form>
