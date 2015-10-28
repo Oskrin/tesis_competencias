@@ -11,7 +11,7 @@
 	}
 
 //Menu banner arriba usuario perfil dependientes del nivel de usuario
-function menu_arriba(){	
+function menu_arriba() {	
 	print'
 	<div id="navbar" class="navbar navbar-default    navbar-collapse       h-navbar">
 			<script type="text/javascript">
@@ -42,8 +42,6 @@ function menu_arriba(){
 						<span class="icon-bar"></span>
 					</button>
 				</div>
-
-				
 
 				<nav role="navigation" class="navbar-menu pull-right collapse navbar-collapse">
 					<ul class="nav navbar-nav">
@@ -91,7 +89,6 @@ function menu_arriba(){
 			</div>
 		</div>
 	';
-	
 }
 
 function menu_lateral(){	
@@ -126,7 +123,7 @@ function menu_lateral(){
 	print'<ul class="submenu">
 		<li ';if ($acus[3]=='idiomas' || $acus[3]=='cursos') {
 			print('class="active open"');
-		}print'>';			
+		} print'>';			
 			echo '<a href="" class="dropdown-toggle">
 				<i class="menu-icon fa fa-caret-right"></i>
 				Generales
@@ -186,6 +183,16 @@ function menu_lateral(){
 			<b class="arrow"></b>
 		</li>';	
 
+		print '<li ';if ($acus[3]=='convocatoria') {
+			print('class="active"');
+		}print'>
+			<a href="../convocatoria/">
+				<i class="menu-icon fa fa-caret-right"></i>
+				Convocatoria
+			</a>
+			<b class="arrow"></b>
+		</li>';	
+
 		print '<li ';if ($acus[3]=='aspirantes') {
 			print('class="active"');
 		}print'>
@@ -196,15 +203,7 @@ function menu_lateral(){
 			<b class="arrow"></b>
 		</li>';	
 
-		print '<li ';if ($acus[3]=='docentes') {
-			print('class="active"');
-		}print'>
-			<a href="../docentes/">
-				<i class="menu-icon fa fa-caret-right"></i>
-				Docentes
-			</a>
-			<b class="arrow"></b>
-		</li>';	
+		
 			
 		print '<li ';if ($acus[3]=='tribunal') {
 			print('class="active"');
@@ -217,7 +216,6 @@ function menu_lateral(){
 		</li>';					
 			print '</ul>
 		</li>';
-
 				
 		print '<li ';if ($acus[3]=='lista_aspirantes' || $acus[3]=='ponencia' || $acus[3]=='otro'|| $acus[3]=='sub') {
 			print('class="active open"');
@@ -365,8 +363,9 @@ function menu_lateral(){
 	</div>
 	';
 }
+
 //pie de Pagina Footer proceso desarrolladores empresa y datos adicionales de la misma
-function footer(){
+function footer() {
 	print'<div class="footer">
 		<div class="footer-inner">
 			<div class="footer-content">
