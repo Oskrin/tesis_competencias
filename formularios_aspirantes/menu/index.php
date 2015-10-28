@@ -109,61 +109,40 @@ function menu_lateral(){
 		</a>
 		<b class="arrow"></b>
 	</li>';		
-	print '<li ';if ($acus[3]=='usuarios' || $acus[3]=='convocatoria' || $acus[3]=='aspirantes') {
+	print '<li ';if ($acus[3]=='aspirantes' || $acus[3]=='adicionales_aspirantes') {
 		print('class="active open"');
 	}print'>
 	<a href="#" class="dropdown-toggle">
 		<i class="menu-icon fa fa-desktop"></i>
 		<span class="menu-text">
-			Ingresos
+			Registro
 		</span>
 		<b class="arrow fa fa-angle-down red"></b>
 	</a>
 	<b class="arrow"></b>';
+
 	print'<ul class="submenu">
 		</li>';
-						
-		print '<li ';if ($acus[3]=='usuarios') {
+
+		// print '<li ';if ($acus[3]=='aspirantes') {
+		// 	print('class="active"');
+		// }print'>
+		// 	<a href="../aspirantes/">
+		// 		<i class="menu-icon fa fa-caret-right"></i>
+		// 		Aspirante
+		// 	</a>
+		// 	<b class="arrow"></b>
+		// </li>';	
+
+		print '<li ';if ($acus[3]=='adicionales_aspirantes') {
 			print('class="active"');
 		}print'>
-			<a href="../usuarios/">
+			<a href="../adicionales_aspirantes/">
 				<i class="menu-icon fa fa-caret-right"></i>
-				Usuario
+				Registro Información
 			</a>
 			<b class="arrow"></b>
 		</li>';	
-
-		print '<li ';if ($acus[3]=='convocatoria') {
-			print('class="active"');
-		}print'>
-			<a href="../convocatoria/">
-				<i class="menu-icon fa fa-caret-right"></i>
-				Convocatoria
-			</a>
-			<b class="arrow"></b>
-		</li>';	
-
-		print '<li ';if ($acus[3]=='aspirantes') {
-			print('class="active"');
-		}print'>
-			<a href="../aspirantes/">
-				<i class="menu-icon fa fa-caret-right"></i>
-				Aspirantes
-			</a>
-			<b class="arrow"></b>
-		</li>';	
-
-		print '<li ';if ($acus[3]=='tribunal') {
-			print('class="active"');
-		}print'>
-			<a href="../titulos/">
-				<i class="menu-icon fa fa-caret-right"></i>
-				Tribunal
-			</a>
-			<b class="arrow"></b>
-		</li>';					
-			print '</ul>
-		</li>';
 				
 		print '<li ';if ($acus[3]=='lista_aspirantes' || $acus[3]=='ponencia' || $acus[3]=='otro'|| $acus[3]=='sub') {
 			print('class="active open"');
@@ -171,7 +150,7 @@ function menu_lateral(){
 			<a href="#" class="dropdown-toggle">
 				<i class="menu-icon fa fa-cubes ranger"></i>
 				<span class="menu-text">
-					Procesos
+					Inscripción
 				</span>
 				<b class="arrow fa fa-angle-down red"></b>
 			</a>
@@ -248,7 +227,7 @@ function menu_lateral(){
 			<a href="#" class="dropdown-toggle">
 				<i class="menu-icon fa fa-print ranger"></i>
 				<span class="menu-text">
-					Reportes
+					Consultas
 				</span>
 				<b class="arrow fa fa-angle-down red"></b>
 			</a>
