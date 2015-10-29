@@ -11,7 +11,7 @@ while ($row = pg_fetch_row($consulta)) {
 $cont++;
 ////////////////////////////////////////
 
- ?>
+?>
 <!DOCTYPE html>
 <html lang="es">
 	<head>

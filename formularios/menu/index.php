@@ -1,19 +1,18 @@
 <?php
 //verificacion si esta iniciada la variable se ssesion 
 //error_reporting(0);
-		if(!isset($_SESSION))
-	{
-		session_start();		
-	}
-	if(!isset($_SESSION["id"])) {
+if(!isset($_SESSION)) {
+	session_start();		
+}
 
-		header('Location: ../../');
-	}
+if (empty($_SESSION['id'])) {
+	header('Location: ../../');
+}
 
 //Menu banner arriba usuario perfil dependientes del nivel de usuario
 function menu_arriba() {	
 	print'
-	<div id="navbar" class="navbar navbar-default    navbar-collapse       h-navbar">
+	<div id="navbar" class="navbar navbar-default navbar-collapse h-navbar">
 			<script type="text/javascript">
 				try{ace.settings.check("navbar" , "fixed")}catch(e){}
 			</script>
@@ -22,6 +21,7 @@ function menu_arriba() {
 				<div class="navbar-header pull-left">
 					<a href="../inici/" class="navbar-brand">
 						<small>
+							<img src="../../dist/images/UNIANDES-Logo.png">
 							SELECCIÓN DEL TALENTO HUMANO BASADO EN COMPETENCIAS 
 						</small>
 					</a>
@@ -29,7 +29,7 @@ function menu_arriba() {
 					<button class="pull-right navbar-toggle navbar-toggle-img collapsed" type="button" data-toggle="collapse" data-target=".navbar-buttons,.navbar-menu">
 						<span class="sr-only">Toggle user menu</span>
 
-						<img src="../../dist/avatars/user.jpg" alt="Jasons Photo" />
+						<img src="../../dist/avatars/user.jpg" alt="" />
 					</button>
 
 					<button class="pull-right navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#sidebar">

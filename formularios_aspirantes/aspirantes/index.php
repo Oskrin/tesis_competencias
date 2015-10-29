@@ -1,9 +1,9 @@
 <?php
- include('../menu/index.php'); 
- include '../conexion.php';
- $conexion = conectarse();
+include('../menu/index.php'); 
+include '../conexion.php';
+$conexion = conectarse();
 
- /////////////contador aspirantes//////////
+/////////////contador aspirantes//////////
 $consulta = pg_query("select max(id_aspirante) from aspirantes");
 while ($row = pg_fetch_row($consulta)) {
     $cont = $row[0];

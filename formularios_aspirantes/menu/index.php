@@ -1,14 +1,13 @@
 <?php
 //verificacion si esta iniciada la variable se ssesion 
 //error_reporting(0);
-		if(!isset($_SESSION))
-	{
-		session_start();		
-	}
-	if(!isset($_SESSION["id"])) {
+if(!isset($_SESSION)) {
+	session_start();		
+}
 
-		header('Location: ../../');
-	}
+if (empty($_SESSION['id'])) {
+	header('Location: ../../');
+}
 
 //Menu banner arriba usuario perfil dependientes del nivel de usuario
 function menu_arriba() {	
@@ -22,6 +21,7 @@ function menu_arriba() {
 				<div class="navbar-header pull-left">
 					<a href="../inici/" class="navbar-brand">
 						<small>
+							<img src="../../dist/images/UNIANDES-Logo.png">
 							SELECCIÓN DEL TALENTO HUMANO BASADO EN COMPETENCIAS 
 						</small>
 					</a>
@@ -144,7 +144,7 @@ function menu_lateral(){
 			<b class="arrow"></b>
 		</li>';	
 				
-		print '<li ';if ($acus[3]=='lista_aspirantes' || $acus[3]=='ponencia' || $acus[3]=='otro'|| $acus[3]=='sub') {
+		print '<li ';if ($acus[3]=='convocatorias') {
 			print('class="active open"');
 			}print'>
 			<a href="#" class="dropdown-toggle">
@@ -156,45 +156,17 @@ function menu_lateral(){
 			</a>
 			<b class="arrow"></b>
 			<ul class="submenu">';			
-			print '<li ';if ($acus[3]=='lista_aspirantes') {
+			print '<li ';if ($acus[3]=='convocatorias') {
 				print('class="active"');
 				}print'>
-				<a href="../lista_aspirantes/">
+				<a href="../convocatorias/">
 					<i class="menu-icon fa fa-caret-right"></i>
-					Lista Aspirante
+					Convocatorias
 				</a>
 				<b class="arrow"></b>
-			</li>';						
-			print '<li ';if ($acus[3]=='ponencia'||$acus[3]=='otro') {
-				print('class="active open"');
-				}print'>
-				<a href="#" class="dropdown-toggle">
-					<i class="menu-icon fa fa-caret-right"></i>
-					Asignar
-					<b class="arrow fa fa-angle-down"></b>
-				</a>
-				<b class="arrow"></b>
-				<ul class="submenu">';					
-				print '<li ';if ($acus[3]=='ponencia') {
-				print('class="active"');
-				}print'>
-					<a href="">
-						<i class="menu-icon fa fa-caret-right"></i>
-						Ponencia
-					</a>
-					<b class="arrow"></b>
-				</li>';									
-				print '<li ';if ($acus[3]=='otro') {
-					print('class="active"');
-				}print'>
-					<a href="../otro/">
-						<i class="menu-icon fa fa-caret-right"></i>
-						Otro
-					</a>
-					<b class="arrow"></b>
-				</li>';										
-				print '</ul>
 			</li>';	
+
+			
 
 			print '<li ';if ($acus[3]=='sub') {
 			print('class="active open"');
@@ -252,30 +224,7 @@ function menu_lateral(){
 				<b class="arrow"></b>
 			</li>';			
 			print '</ul>
-		</li>';			
-	
-		print '<li ';if ($acus[3]=='privilegios') {
-		print('class="active open"');
-		}print'>
-			<a href="#" class="dropdown-toggle">
-				<i class="menu-icon fa fa-user"></i>
-				<span class="menu-text">
-					Parametros
-				</span>
-				<b class="arrow fa fa-angle-down red"></b>
-			</a>
-			<b class="arrow"></b>
-			<ul class="submenu">';			
-			print '<li ';if ($acus[3]=='privilegios') {				
-				print('class="active"');
-			}print'>
-				<a href="../privilegios/">
-					<i class="menu-icon fa fa-caret-right"></i>
-					Privilegios
-				</a>
-				<b class="arrow"></b>
-			</li>';								
-									
+		</li>';									
 					
 			print '</ul>
 		</li>';				

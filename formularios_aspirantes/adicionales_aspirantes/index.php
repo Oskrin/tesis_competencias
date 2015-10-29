@@ -1,14 +1,14 @@
 <?php
- include('../menu/index.php'); 
- include '../conexion.php';
- include '../funciones_generales.php';
- $conexion = conectarse();
- error_reporting(0);
- $id_user = sesion_activa();
+include('../menu/index.php'); 
+include '../conexion.php';
+include '../funciones_generales.php';
+$conexion = conectarse();
+error_reporting(0);
+$id_user = sesion_activa();
 
- // cargar informacion 
- $consulta = pg_query("select * from aspirantes where id_aspirante = '".$id_user."'");
- while ($row = pg_fetch_row($consulta)) {
+// cargar informacion 
+$consulta = pg_query("select * from aspirantes where id_aspirante = '".$id_user."'");
+while ($row = pg_fetch_row($consulta)) {
  	$nombres_aspirante = $row[3];
  	$apellidos_aspirante = $row[4];
  	$identificacion_aspirante = $row[2];
@@ -16,12 +16,10 @@
  	$movil_aspirante = $row[6];
  	$mail_aspirante = $row[9];
  	$direccion_aspirante = $row[12];
+ 	$imagen_aspirante = $row[13];
+}
+?>
 
- }
-
-
-
- ?>
 <!DOCTYPE html>
 <html lang="es">
 	<head>
@@ -147,7 +145,7 @@
 															<div class="row">
 																<div class="col-xs-12 col-sm-3 center">
 																	<span class="profile-picture">
-																		<img class="editable img-responsive" alt="Alex's Avatar" id="avatar2" src="../../dist/avatars/profile-pic.jpg" />
+																		<img class="editable img-responsive" alt="Alex's Avatar" id="avatar2" <?php echo 'src=../../aspirante/fotos/'.$imagen_aspirante.''?> />
 																	</span>
 																	<div class="space space-4"></div>
 																</div><!-- /.col -->
