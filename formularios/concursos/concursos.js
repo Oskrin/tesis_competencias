@@ -4,7 +4,7 @@
 
 
 	//////////////para tablas//////////
-		jQuery(function($) {
+jQuery(function($) {
 	    var grid_selector = "#grid-table";
 	    var pager_selector = "#grid-pager";
 	    
@@ -28,27 +28,23 @@
 	        subGridRowExpanded: function (subgridDivId, rowId) {	          
 	        },
 
-	        url: 'xmlUsuarios.php',
+	        url: 'xmlConcursos.php',
 	        datatype: "xml",
 	        height: 250,
-	        colNames:['ID','IDENTIFICACIÓN','NOMBRES','APELLIDOS','TELÉFONO','CELULAR','CORREO','DIRECCIÓN','USUARIO','CLAVE','CARGO'],
+	        colNames:['ID','CONCURSO','CONVOCATORIA','TRIBUNAL','CARGO CONCURSO','DETALLES','FECHA CREACIÓN'],
 	        colModel:[
-	            {name:'id_usuario',index:'id_usuario', width:60, sorttype:"int", editable: true, hidden: true, editoptions: {readonly: 'readonly'}},
-	            {name:'identificacion_usuario',index:'identificacion_usuario',width:150, editable:true, editoptions:{size:"20",maxlength:"10"}, editrules: {required: true}, editoptions:{maxlength: 10, size:20,dataInit: function(elem){$(elem).bind("keypress", function(e) {return numeros(e)})}}},
-	            {name:'nombres_usuario',index:'nombres_usuario', width:150,editable: true,editoptions:{size:"20"}, editrules: {required: true}},
-	            {name:'apellidos_usuario',index:'nombres_usuario', width:150,editable: true,editoptions:{size:"20"}, editrules: {required: true}},
-	            {name:'telf_usuario',index:'telf_usuario', width:150,editable: true,editoptions:{size:"20",maxlength:"30"}, editrules: {required: false}, editoptions:{maxlength: 10, size:20,dataInit: function(elem){$(elem).bind("keypress", function(e) {return numeros(e)})}}},
-	            {name:'cell_usuario',index:'cell_usuario', width:150,editable: true,editoptions:{size:"20",maxlength:"30"}, editrules: {required: false}, editoptions:{maxlength: 10, size:20,dataInit: function(elem){$(elem).bind("keypress", function(e) {return numeros(e)})}}},
-	            {name:'mail_usuario',index:'mail_usuario', width:150,editable: true, formatter: 'email',editoptions:{size:"20"}},
-	            {name:'direccion_usuario',index:'direccion_usuario', width:150,editable: true,editoptions:{size:"20"}},
-	            {name:'usuario',index:'usuario', width:150,editable: true,editoptions:{size:"20"}, editrules: {required: true}},
-	            {name:'clave',index:'clave', width:150, edittype: 'password' ,editable: true,editoptions:{size:"20"}, editrules: {required: true}},
-	            {name:'cargo',index:'cargo', search: false, hidden: false, align: 'center', editable: true, edittype: "select", editoptions: {value: "1:Administrador;2:Asistente"}},
+	            {name:'id_concurso',index:'id_concurso', width:60, sorttype:"int", editable: true, hidden: true, editoptions: {readonly: 'readonly'}},
+	            {name:'nombre_concurso',index:'nombre_concurso',width:150, editable:true, editoptions:{maxlength:"100"}, editrules: {required: true}},
+	            {name:'convocatoria',index:'convocatoria',width:150, editable:true, edittype:"select", editrules: {required: true}, editoptions:{dataUrl:'retornar_convocatoria.php'}},
+	            {name:'tribunal',index:'tribunal',width:150, editable:true, edittype:"select", editrules: {required: true}, editoptions:{dataUrl:'retornar_tribunal.php'}},
+	            {name:'cargo_concurso',index:'cargo_concurso',width:150, editable:true, editoptions:{maxlength:"100"}, editrules: {required: true}},
+	            {name:'detalle_cargo',index:'detalle_cargo',width:150, editable:true,edittype:"textarea", editoptions:{rows:"5",cols:"20"}, editrules: {required: true}},
+	            {name:'fecha_creacion',index:'fecha_creacion', width:150, editable: true, editoptions:{size:"20",maxlength:"30",readonly: 'readonly'}, editrules: {required: false}},
 	        ], 
 	        rowNum:10,
 	        rowList:[10,20,30],
 	        pager : pager_selector,
-	        sortname: 'id_usuario',
+	        sortname: 'id_concurso',
 	        sortorder: 'asc',
 	        altRows: true,
 	        multiselect: false,
@@ -64,8 +60,8 @@
 	            }, 0);
 	        },
 
-	        editurl: "usuarios.php",
-	        caption: "USUARIOS"
+	        editurl: "concursos.php",
+	        caption: "CONCURSOS"
 	    });
 	    $(window).triggerHandler('resize.jqGrid');//cambiar el tamaño para hacer la rejilla conseguir el tamaño correcto
 
@@ -112,7 +108,7 @@
 	            style_edit_form(form);
 	        },
 	        afterSubmit: function (response){
-			if(response.responseText == 2){
+			if(response.responseText == 2) {
 	        		$.gritter.add({
 						title: 'Mensaje',
 						text: 'Registro Modificado correctamente <i class="ace-icon fa fa-spinner fa-spin green bigger-125"></i>',
@@ -120,10 +116,10 @@
 					});
 	        		return true;
 	        	}else{
-	        		// if(response.responseText == 3){	
-	        		// 	// $("#nombre_categoria").val("");
-	        		// 	// return [false,"Error.. La Categoria ya existe"];
-		        	// }	
+	        		if(response.responseText == 3){	
+	        			$("#nombre_idioma").val("");
+	        			return [false,"Error.. El idioma ya existe"];
+		        	}	
 	        	}
 	        },
 	    },
@@ -138,21 +134,21 @@
 	            .wrapInner('<div class="widget-header" />')
 	            style_edit_form(form);
 	        },
-	        afterSubmit: function (response){
-	        	if(response.responseText == 1){
-	        		$.gritter.add({
-						title: 'Mensaje',
-						text: 'Registro Guardado correctamente <i class="ace-icon fa fa-spinner fa-spin green bigger-125"></i>',
-						time: 1000				
-					});
-	        		return true;
-	        	}else{
+	        // afterSubmit: function (response){
+	        	// if(response.responseText == 1) {
+	    //     		$.gritter.add({
+					// 	title: 'Mensaje',
+					// 	text: 'Registro Guardado correctamente <i class="ace-icon fa fa-spinner fa-spin green bigger-125"></i>',
+					// 	time: 1000				
+					// });
+	    //     		return true;
+	        	// } else {
 	        		// if(response.responseText == 3){	
-	        		// 	$("#nombre_categoria").val("");
-	        		// 	return [false,"Error.. La Categoria ya existe"];
+	        		// 	$("#nombre_idioma").val("");
+	        		// 	return [false,"Error.. El idioma ya existe"];
 		        	// }	
-	        	}
-	        },
+	        	// }
+	        // },
 	    },
 	    {
 	        //delete record form
@@ -172,7 +168,7 @@
 	    {
 	          recreateForm: true,
 	          overlay:false,
-	        afterShowSearch: function(e){
+	        afterShowSearch: function(e) {
 	            var form = $(e[0]);
 	            form.closest('.ui-jqdialog').find('.ui-jqdialog-title').wrap('<div class="widget-header" />')
 	            style_search_form(form);
@@ -198,7 +194,8 @@
 	    
 	    function style_edit_form(form) {
 	        //enable datepicker on "sdate" field and switches for "stock" field
-	        form.find('input[name=sdate]').datepicker({format:'yyyy-mm-dd' , autoclose:true})
+	        form.find('input[name=fecha_inicio]').datepicker({format:'yyyy-mm-dd' , autoclose:true})
+	        form.find('input[name=fecha_fin]').datepicker({format:'yyyy-mm-dd' , autoclose:true})
 	        
 	        form.find('input[name=stock]').addClass('ace ace-switch ace-switch-5').after('<span class="lbl"></span>');
 	        //don't wrap inside a label element, the checkbox value won't be submitted (POST'ed)

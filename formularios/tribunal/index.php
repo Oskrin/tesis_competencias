@@ -6,7 +6,7 @@
 		<meta charset="utf-8" />
 		
 		<link rel="shortcut icon" href="../../dist/images/logo.fw.png">
-		<title>.::UNIANDES.</title>
+		<title>.:UNIANDES:.</title>
 
 		<meta name="description" content="Dynamic tables and grids using jqGrid plugin" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
@@ -50,7 +50,7 @@
                                 <a href="../inicio/">Inicio</a>
                             </li>
                             <li class="active">Ingresos</li>
-                            <li class="active">Usuarios</li>
+                            <li class="active">Tribunal</li>
                         </ul>
                     </div>
 					<div class="page-content">
@@ -102,7 +102,7 @@
         <script src="../../dist/js/jqGrid/i18n/grid.locale-en.js"></script>
 
         <script src="../generales.js"></script>
-		<script src="usuarios.js"></script>
+		<script src="tribunal.js"></script>
 	</body>
 </html>  
 

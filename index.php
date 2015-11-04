@@ -123,194 +123,81 @@
 																		Ingreso Cuenta
 																	</a>
 																</li>
-
-																<li>
-																	<a data-toggle="tab" href="#info_pro">
-																		<i class="green ace-icon fa fa-pencil-square-o bigger-125"></i>
-																		Nuevo Aspirante
-																	</a>
-																</li>
 															</ul>
 
 															<div class="tab-content">
 																<div id="ingreso" class="tab-pane fade in active">
-																	<form class="form-horizontal" role="form" name="form_ingreso" id="form_ingreso">
-																		<div class="space-20"></div>
+																	<div class="col-sm-10 col-sm-offset-1">
+																		<div class="login-container">
+																			<div class="space-6"></div>
+																			<div class="position-relative">
+																				<div id="login-box" class="login-box visible widget-box no-border">
+																					<div class="widget-body">
+																						<div class="widget-main">
+																							<h4 class="header blue lighter bigger">
+																								Datos Personales
+																							</h4>
+																							<div class="space-6"></div>
+																							<form role="form" name="form_ingreso" id="form_ingreso">
+																								<fieldset>
+																									<label class="block clearfix">
+																										<span class="block input-icon input-icon-right">
+																											<input type="text" name="usuario" id="usuario" class="form-control" placeholder="Usuario" />
+																											<i class="ace-icon fa fa-user"></i>
+																										</span>
+																									</label>
 
-																		<div class="form-group">
-																			<label class="col-sm-3 control-label no-padding-right" for="usuario">Usuario</label>
+																									<label class="block clearfix">
+																										<span class="block input-icon input-icon-right">
+																											<input type="password" name="clave" id="clave" class="form-control" placeholder="Password" />
+																											<i class="ace-icon fa fa-lock"></i>
+																										</span>
+																									</label>
+																									<div class="space"></div>
+																									<div class="space-4"></div>
+																								</fieldset>
+																							</form>
 
-																			<div class="col-sm-9">
-																				<input type="text" name="usuario" id="usuario" placeholder="Usuario"/>
-																			</div>
-																		</div>
+																							<div class="clearfix">
+																								<label class="inline">
+																									<input type="checkbox" class="ace" />
+																									<span class="lbl"> Recuérdame</span>
+																								</label>
 
-																		<div class="space-4"></div>
+																								<button type="submit" name="btn_Ingresar" id="btn_Ingresar" class="width-35 pull-right btn btn-sm btn-primary">
+																									<i class="ace-icon fa fa-key"></i>
+																									<span class="bigger-110">Enviar</span>
+																								</button>
+																							</div>
 
-																		<div class="form-group">
-																			<label class="col-sm-3 control-label no-padding-right" for="clave">Contraseña</label>
+																							<div class="social-or-login center">
+																								<span class="bigger-110"></span>
+																							</div>
 
-																			<div class="col-sm-9">
-																				<input type="password" name="clave" id="clave" placeholder="Password"/>
-																			</div>
-																		</div>
-																	</form>	
+																							<div class="space-6"></div>
+																						</div><!-- /.widget-main -->
 
-																		<div class="clearfix form-actions center">
-																			<button type="submit" class="btn btn-primary" id="btn_Ingresar"><i class="ace-icon fa fa-floppy-o bigger-120 white"></i>
-																				Ingresar
-																			</button>
-																		</div>
-																</div>
+																						<div class="toolbar clearfix">
+																							<div>
+																								<a href="#" data-target="#forgot-box" class="forgot-password-link">
+																									<i class="ace-icon fa fa-arrow-left"></i>
+																									Olvidé mi contraseña
+																								</a>
+																							</div>
 
-																<div id="info_pro" class="tab-pane fade">
-																	<form class="form-horizontal" role="form" name="form_aspirantes" id="form_aspirantes">
-																		<div class="col-sm-4">
-																			<div class="form-group">
-																				<label class="col-sm-4 control-label no-padding-right" for="tipo_documento"> Tipo Documento:</label>
-																				<div class="col-sm-8">
-																					<select class="chosen-select form-control" id="tipo_documento" name="tipo_documento" data-placeholder="Tipo Documento">
-																						<option value="Cedula">Cédula</option>	
-																						<!-- <option value="RUC">RUC</option>	 -->
-																						<option value="Pasaporte">Pasaporte</option>																				
-																					</select>						
-																					<input type="hidden" id="id_aspirante" name="id_aspirante" />
-																					<input type="hidden" id="comprobante" name="comprobante" value="<?php echo $cont ?>" />											
-																				</div>
-																			</div>
-
-																			<div class="form-group">
-																				<label class="col-sm-4 control-label no-padding-right" for="nombres_aspirantes"> Nombres: <font color="red">*</font></label>
-																				<div class="col-sm-8">
-																					<input type="text" id="nombres_aspirantes" name="nombres_aspirantes"  placeholder="Nombres Completos" class="form-control" data-toggle="tooltip" data-original-title="" required pattern="[0-9]{10,10}"/>																																																						
-																				</div>
-																			</div>
-
-																			<div class="form-group">
-																				<label class="col-sm-4 control-label no-padding-right" for="telf_aspirante"> Teléfono:</label>
-																				<div class="col-sm-8">
-																					<span class="block input-icon input-icon-right">
-																						<input type="text" id="telf_aspirante" name="telf_aspirante" placeholder="Teléfono Aspirante" class="form-control"/>
-																						<i class="ace-icon fa fa-phone fa-flip-horizontal"></i>
-									                                                </span>
-																				</div>
-																			</div>
-
-																			<div class="form-group">																	
-																				<label class="col-sm-4 control-label no-padding-right" for="fnac_aspirante">Fecha Nacimiento: <font color="red">*</font></label>
-																				<div class="col-sm-8">
-																					<div class="input-group">
-																						<input class="form-control date-picker" id="fnac_aspirante" name="fnac_aspirante" readonly type="text" data-date-format="yyyy-mm-dd" />
-																						<span class="input-group-addon">
-																							<i class="fa fa-calendar bigger-110"></i>
-																						</span>
-																					</div>
-																				</div>																														
-																			</div>
-
-																			<div class="form-group">
-																				<label class="col-sm-4 control-label no-padding-right" for="mail_aspirante"> Correo:</label>
-																				<div class="col-sm-8">
-																					<span class="block input-icon input-icon-right">
-																						<input type="text" id="mail_aspirante" name="mail_aspirante" placeholder="Correo Aspirante" class="form-control" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}" />
-																						<i class="ace-icon fa fa-envelope fa-flip-horizontal"></i>
-									                                                </span>
-																				</div>
-																			</div>
-
-																			<div class="form-group">
-																				<label class="col-sm-4 control-label no-padding-right" for="ciudad_aspirante"> Ciudad: <font color="red">*</font></label>
-																				<div class="col-sm-8">
-																					<input type="text" id="ciudad_aspirante" name="ciudad_aspirante"  placeholder="Ciudad Aspirante" class="form-control" data-toggle="tooltip" data-original-title=""  />																																																						
-																				</div>
-																			</div>
-
-																			<div class="form-group">
-											                                  <label class="col-sm-4 control-label no-padding-right" for="archivo"> Foto:</label>
-											                                  <div class="col-sm-8">
-											                                  	<input type="file" name="archivo" id="archivo" onchange='Test.UpdatePreview(this)' accept="image/*">
-											                                  </div>
-											                                </div>
-																		</div>
-
-																		<div class="col-sm-4">
-																			<div class="form-group">
-																				<label class="col-sm-4 control-label no-padding-right" for="ruc_ci"> RUC/C.I.: <font color="red">*</font></label>
-																				<div class="col-sm-8">
-																					<input type="text" id="ruc_ci" name="ruc_ci"  placeholder="Identificación Aspirante" class="form-control" data-toggle="tooltip" data-original-title="" required pattern="[0-9]{10,10}" maxlength="10" minlength="10" />																																																						
-																				</div>
-																			</div>
-
-																			<div class="form-group">
-																				<label class="col-sm-4 control-label no-padding-right" for="apellidos_aspirantes"> Apellidos: <font color="red">*</font></label>
-																				<div class="col-sm-8">
-																					<input type="text" id="apellidos_aspirantes" name="apellidos_aspirantes"  placeholder="Apellidos Completos" class="form-control" data-toggle="tooltip" data-original-title="" required pattern="[0-9]{10,10}" />																																																						
-																				</div>
-																			</div>
-
-																			<div class="form-group">
-																				<label class="col-sm-4 control-label no-padding-right" for="movil_aspirante"> Celular: </label>																	
-																				<div class="col-sm-8">
-																					<span class="block input-icon input-icon-right">
-																						<input type="text" id="movil_aspirante" name="movil_aspirante" placeholder="Celular Aspirante" class="form-control" />
-																						<i class="ace-icon fa fa-mobile fa-flip-horizontal"></i>
-									                                                </span>
-																				</div>
-																			</div>
-
-																			<div class="form-group">
-																				<label class="col-sm-4 control-label no-padding-right" for="genero_aspirante"> Genero: </label>
-																				<div class="col-sm-8">
-																					<select class="chosen-select form-control" id="genero_aspirante" name="genero_aspirante" data-placeholder="Genero">
-																						<option value="Masculino">Masculino</option>	
-																						<option value="Femenino">Femenino</option>	
-																					</select>						
-																				</div>
-																			</div>
-
-																			<div class="form-group">
-																				<label class="col-sm-4 control-label no-padding-right" for="pais_aspirante"> País: <font color="red">*</font></label>
-																				<div class="col-sm-8">
-																					<input type="text" id="pais_aspirante" name="pais_aspirante"  placeholder="País Aspirante" class="form-control" data-toggle="tooltip" data-original-title=""  />																																																						
-																				</div>
-																			</div>
-
-																			<div class="form-group">
-																				<label class="col-sm-4 control-label no-padding-right" for="direccion_aspirante"> Dirección: <font color="red">*</font></label>
-																				<div class="col-sm-8">
-																					<input type="text" id="direccion_aspirante" name="direccion_aspirante"  placeholder="Dirección Aspirante" class="form-control" data-toggle="tooltip" data-original-title=""  />																																																						
-																				</div>
-																			</div>
-
-																			<div class="form-group">
-																				<label class="col-sm-4 control-label no-padding-right" for="comentarios"> Comentarios:</label>
-																				<div class="col-sm-8">	
-																					<textarea id="comentarios" name="comentarios" placeholder="" class="form-control" ></textarea>
-																				</div>
-																			</div>
-																		</div>
-
-																		<div class="col-sm-4">
-																			<div class="form-group">
-											                                	<label class="col-sm-4 control-label no-padding-right" for=""></label>
-											                                	<div class="col-sm-8" style="width: 180px; height: 180px; align="center" " title="LOGO">
-											                                      <img id="foto" name="foto" style="width: 100%; height: 100%"  />
-											                                  </div>
-											                                </div>	
-																		</div>
-																	</form>	
-
-																	
-
-																	<div class="col-sm-12">
-																		<div class="space-10"></div>
-																		<div class="clearfix form-actions center">
-																			<button type="submit" class="btn btn-primary" id="btn_Guardar"><i class="ace-icon fa fa-floppy-o bigger-120 white"></i>
-																				Registar
-																			</button>
+																							<div>
+																								<a href="registro.php" data-target="#signup-box" class="user-signup-link">
+																									Quiero registrarme
+																									<i class="ace-icon fa fa-arrow-right"></i>
+																								</a>
+																							</div>
+																						</div>
+																					</div><!-- /.widget-body -->
+																				</div><!-- /.login-box -->
+																			</div><!-- /.position-relative -->
 																		</div>
 																	</div>
-																</div>
+																</div>s
 													       </div>
 														</div>
 													</div>
@@ -329,8 +216,8 @@
 				<div class="footer-inner">
 					<div class="footer-content">
 						<span class="bigger-120">
-							<span class="blue bolder">Ace</span>
-							Application &copy; 2013-2014
+							<span class="blue bolder">Uniandes </span>
+							Aplicación Web &copy; 2015-2016
 						</span>
 
 						&nbsp; &nbsp;

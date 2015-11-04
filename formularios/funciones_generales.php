@@ -141,6 +141,7 @@ function unique($fecha_larga) {
     $id = $fecha_larga . $id;
     return $id;    
 }
+
 //echo unique($fecha_larga) ;
 function guardarSql($conexion, $sql) {
     $resp = true;    
@@ -160,6 +161,7 @@ function id($conexion, $sql) { //retorna el id de una consulta con solo un param
     }
     echo $id;
 }
+
 function id_unique($conexion, $sql) { //retorna el id de una consulta con solo un parametro de retorno en el sql
     $id = 0;
     $sql = pg_query($conexion, $sql);
@@ -312,12 +314,4 @@ function auditoria_sistema($conexion,$id_user,$fecha_ingreso,$hora_ingreso,$fech
     }
 
 }
-
-// $contt = 0;
-// $consulta = pg_query("select max(id_auditoria) from auditoria");
-// while ($row = pg_fetch_row($consulta)) {
-//     $contt = $row[0];
-// }
-// $contt++;
-
 ?>

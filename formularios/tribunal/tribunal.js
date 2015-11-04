@@ -28,21 +28,22 @@ jQuery(function($) {
 	        subGridRowExpanded: function (subgridDivId, rowId) {	          
 	        },
 
-	        url: 'xmlIdiomas.php',
+	        url: 'xmlTribunal.php',
 	        datatype: "xml",
 	        height: 250,
-	        colNames:['ID','NOMBRE IDIOMA','NIVEL LECTURA','NIVEL ESCRITURA','FECHA CREACIÓN'],
+	        colNames:['ID','AREA TRIBUNAL','TRIBUNAL 1','TRIBUNAL 2','TRIBUNAL 3','FECHA CREACIÓN'],
 	        colModel:[
-	            {name:'id_idioma',index:'id_idioma', width:60, sorttype:"int", editable: true, hidden: true, editoptions: {readonly: 'readonly'}},
-	            {name:'nombre_idioma',index:'nombre_idioma',width:150, editable:true, editoptions:{size:"20",maxlength:"10"}, editrules: {required: true}},
-	            {name:'nivel_lectura',index:'nivel_lectura', width:150,editable: true,editoptions:{size:"20"}, editrules: {required: true}},
-	            {name:'nivel_escritura',index:'nivel_escritura', width:150,editable: true,editoptions:{size:"20"}, editrules: {required: true}},
+	            {name:'id_tribunal',index:'id_tribunal', width:60, sorttype:"int", editable: true, hidden: true, editoptions: {readonly: 'readonly'}},
+	            {name:'area_tribunal',index:'area_tribunal',width:150, editable:true, editoptions:{maxlength:"100"}, editrules: {required: true}},
+	            {name:'tribunal1',index:'tribunal1',width:150, editable:true, editoptions:{maxlength:"100"}, editrules: {required: true}},
+	            {name:'tribunal2',index:'tribunal2',width:150, editable:true, editoptions:{maxlength:"100"}, editrules: {required: true}},
+	            {name:'tribunal3',index:'tribunal3',width:150, editable:true, editoptions:{maxlength:"100"}, editrules: {required: true}},
 	            {name:'fecha_creacion',index:'fecha_creacion', width:150, editable: true, editoptions:{size:"20",maxlength:"30",readonly: 'readonly'}, editrules: {required: false}},
 	        ], 
 	        rowNum:10,
 	        rowList:[10,20,30],
 	        pager : pager_selector,
-	        sortname: 'id_idioma',
+	        sortname: 'id_tribunal',
 	        sortorder: 'asc',
 	        altRows: true,
 	        multiselect: false,
@@ -58,8 +59,8 @@ jQuery(function($) {
 	            }, 0);
 	        },
 
-	        editurl: "idiomas.php",
-	        caption: "IDIOMAS"
+	        editurl: "tribunal.php",
+	        caption: "TRIBUNAL"
 	    });
 	    $(window).triggerHandler('resize.jqGrid');//cambiar el tamaño para hacer la rejilla conseguir el tamaño correcto
 
@@ -132,21 +133,21 @@ jQuery(function($) {
 	            .wrapInner('<div class="widget-header" />')
 	            style_edit_form(form);
 	        },
-	        afterSubmit: function (response){
-	        	if(response.responseText == 1){
-	        		$.gritter.add({
-						title: 'Mensaje',
-						text: 'Registro Guardado correctamente <i class="ace-icon fa fa-spinner fa-spin green bigger-125"></i>',
-						time: 1000				
-					});
-	        		return true;
-	        	}else{
-	        		if(response.responseText == 3){	
-	        			$("#nombre_idioma").val("");
-	        			return [false,"Error.. El idioma ya existe"];
-		        	}	
-	        	}
-	        },
+	        // afterSubmit: function (response){
+	        	// if(response.responseText == 1) {
+	    //     		$.gritter.add({
+					// 	title: 'Mensaje',
+					// 	text: 'Registro Guardado correctamente <i class="ace-icon fa fa-spinner fa-spin green bigger-125"></i>',
+					// 	time: 1000				
+					// });
+	    //     		return true;
+	        	// } else {
+	        		// if(response.responseText == 3){	
+	        		// 	$("#nombre_idioma").val("");
+	        		// 	return [false,"Error.. El idioma ya existe"];
+		        	// }	
+	        	// }
+	        // },
 	    },
 	    {
 	        //delete record form
@@ -166,7 +167,7 @@ jQuery(function($) {
 	    {
 	          recreateForm: true,
 	          overlay:false,
-	        afterShowSearch: function(e){
+	        afterShowSearch: function(e) {
 	            var form = $(e[0]);
 	            form.closest('.ui-jqdialog').find('.ui-jqdialog-title').wrap('<div class="widget-header" />')
 	            style_search_form(form);
@@ -192,7 +193,8 @@ jQuery(function($) {
 	    
 	    function style_edit_form(form) {
 	        //enable datepicker on "sdate" field and switches for "stock" field
-	        form.find('input[name=sdate]').datepicker({format:'yyyy-mm-dd' , autoclose:true})
+	        form.find('input[name=fecha_inicio]').datepicker({format:'yyyy-mm-dd' , autoclose:true})
+	        form.find('input[name=fecha_fin]').datepicker({format:'yyyy-mm-dd' , autoclose:true})
 	        
 	        form.find('input[name=stock]').addClass('ace ace-switch ace-switch-5').after('<span class="lbl"></span>');
 	        //don't wrap inside a label element, the checkbox value won't be submitted (POST'ed)

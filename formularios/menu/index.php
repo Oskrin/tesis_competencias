@@ -109,7 +109,7 @@ function menu_lateral(){
 		</a>
 		<b class="arrow"></b>
 	</li>';		
-	print '<li ';if ($acus[3]=='usuarios' || $acus[3]=='convocatoria' || $acus[3]=='aspirantes') {
+	print '<li ';if ($acus[3]=='usuarios' || $acus[3]=='convocatoria' || $acus[3]=='tribunal' || $acus[3]=='concursos' || $acus[3]=='aspirantes') {
 		print('class="active open"');
 	}print'>
 	<a href="#" class="dropdown-toggle">
@@ -143,6 +143,26 @@ function menu_lateral(){
 			<b class="arrow"></b>
 		</li>';	
 
+		print '<li ';if ($acus[3]=='tribunal') {
+			print('class="active"');
+		}print'>
+			<a href="../tribunal/">
+				<i class="menu-icon fa fa-caret-right"></i>
+				Tribunal
+			</a>
+			<b class="arrow"></b>
+		</li>';	
+
+		print '<li ';if ($acus[3]=='concursos') {
+			print('class="active"');
+		}print'>
+			<a href="../concursos/">
+				<i class="menu-icon fa fa-caret-right"></i>
+				Concursos
+			</a>
+			<b class="arrow"></b>
+		</li>';	
+
 		print '<li ';if ($acus[3]=='aspirantes') {
 			print('class="active"');
 		}print'>
@@ -153,15 +173,7 @@ function menu_lateral(){
 			<b class="arrow"></b>
 		</li>';	
 
-		print '<li ';if ($acus[3]=='tribunal') {
-			print('class="active"');
-		}print'>
-			<a href="../titulos/">
-				<i class="menu-icon fa fa-caret-right"></i>
-				Tribunal
-			</a>
-			<b class="arrow"></b>
-		</li>';					
+						
 			print '</ul>
 		</li>';
 				

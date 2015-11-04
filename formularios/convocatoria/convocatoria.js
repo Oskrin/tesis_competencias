@@ -34,7 +34,7 @@ jQuery(function($) {
 	        colNames:['ID','CONVOCATORIA','FECHA INICIO','FECHA FIN','FECHA CREACIÓN'],
 	        colModel:[
 	            {name:'id_convocatoria',index:'id_convocatoria', width:60, sorttype:"int", editable: true, hidden: true, editoptions: {readonly: 'readonly'}},
-	            {name:'descripcion_convocatoria',index:'descripcion_convocatoria',width:150, editable:true, editoptions:{size:"20",maxlength:"10"}, editrules: {required: true}},
+	            {name:'descripcion_convocatoria',index:'descripcion_convocatoria',width:150, editable:true, editoptions:{size:"20",maxlength:"100"}, editrules: {required: true}},
 	            {name:'fecha_inicio',index:'fecha_inicio',width:90, editable:true, sorttype:"date",unformat: pickDate},
 	            {name:'fecha_fin',index:'fecha_fin',width:90, editable:true, sorttype:"date",unformat: pickDate},
 	            {name:'fecha_creacion',index:'fecha_creacion', width:150, editable: true, editoptions:{size:"20",maxlength:"30",readonly: 'readonly'}, editrules: {required: false}},

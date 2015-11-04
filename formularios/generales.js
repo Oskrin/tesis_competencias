@@ -411,13 +411,30 @@ function documentos(fun){
     }
 }
 
-function carga_idiomas(id){
-    $.ajax({/*cargar el select idioma*/        
+function carga_convocatoria(id){
+    $.ajax({/*cargar el select convocatoria*/        
         type: "POST",
         dataType: 'json',        
         url: "../carga_ubicaciones.php?tipo=0&fun=1",        
         success: function(response) {         
             $("#"+id).html("");
+            $("#"+id).append("<option value = ''></option>");
+            for (var i = 0; i < response.length; i=i+2) {               
+                $("#"+id).append("<option value ="+response[i]+">"+response[i+1]+"</option>");                                                                                                                                           
+            }               
+            $('#'+id).trigger('chosen:updated')
+        }                   
+    });      
+}
+
+function carga_tribunal(id){
+    $.ajax({/*cargar el select convocatoria*/        
+        type: "POST",
+        dataType: 'json',        
+        url: "../carga_ubicaciones.php?tipo=0&fun=2",        
+        success: function(response) {         
+            $("#"+id).html("");
+            $("#"+id).append("<option value = ''></option>");
             for (var i = 0; i < response.length; i=i+2) {               
                 $("#"+id).append("<option value ="+response[i]+">"+response[i+1]+"</option>");                                                                                                                                           
             }               

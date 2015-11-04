@@ -1,65 +1,6 @@
 $(document).on("ready",inicio);
 
-function redireccionar() {
-    setTimeout("location.href='formularios_aspirantes/adicionales_aspirantes/'", 3000);
-}
-
-function redireccionar_ingreso() {
-    setTimeout("location.href='index.php'", 3000);
-}
-
-function retornar() {
-    location.href = '.../../index.php';
-}
-
-function ingresar() {
-    if ($("#usuario").val() == "") {
-        $("#usuario").focus();
-        alertify.error("Ingrese un Usuario");
-    } else {
-        if ($("#clave").val() == "") {
-            $("#clave").focus();
-            alertify.error("Ingrese una contraseña");
-
-        } else {
-            $.ajax({
-                url:'aspirante/proceso.php',
-                type:'POST',
-                data:{g:'ok',txt_1:$('#usuario').val(),txt_2:$('#clave').val()},
-                success:function(data){                 
-                    console.log(data)
-                    if (data==1) {
-                        $.gritter.add({
-                            title: 'Información Mensaje',
-                            text: ' <span class="fa fa-shield"></span>'
-                                        +' Bienvenido: <span class="text-success">'+$('#usuario').val().toUpperCase()
-                                    +'</span><br><span class="fa fa-paw"></span> Dame unos segundos para acceder a la aplicación <span class="text-succes fa fa-spinner fa-spin"></span>'
-                                    ,
-                            image: 'dist/avatars/avatar1.png', //in Ace demo dist will be replaced by correct assets path
-                            sticky: false,
-                            time: 3000,                                             
-                        });                                 
-                        redireccionar();
-                    };
-                    if (data==0) {
-                        $.gritter.add({
-                            title: '<span>Información Mensaje</span>',
-                            text: ' <span class="fa fa-shield"></span>'
-                                        +' <span class="text-danger">Su usuario o contraseña son incorrectos</span>'
-                                    +'<span class="fa fa-ban fa-stack-2x text-danger"></span>',
-                            image: 'dist/avatars/avatar1.png', //in Ace demo dist will be replaced by correct assets path
-                            sticky: false,
-                            time: 3000,                                             
-                        }); 
-                        $("#clave").val("");
-                    };
-                }
-            });
-        }
-    }    
-} 
-
-function guardar_aspirante() {
+function guardar_docente() {
     var iden = $("#ruc_ci").val();
     
     if ($("#tipo_documento").val() === "") {
@@ -74,77 +15,112 @@ function guardar_aspirante() {
                 $("#ruc_ci").focus();
                 alertify.error("Error.. Minimo 13 digitos ");
             } else {
-                if ($("#nombres_aspirantes").val() === "") {
-                    $("#nombres_aspirantes").focus();
+                if ($("#nombres").val() === "") {
+                    $("#nombres").focus();
                     alertify.error("Ingrese Nombres completos");
                 } else {
-                    if ($("#apellidos_aspirantes").val() === "") {
-                        $("#apellidos_aspirantes").focus();
+                    if ($("#apellidos").val() === "") {
+                        $("#apellidos").focus();
                          alertify.error("Ingrese Apellidos completos");
                     } else {
-                        if ($("#fnac_aspirante").val() === "") {
-                            $("#fnac_aspirante").focus();
-                            alertify.error("Ingrese Fecha Nacimiento");
+                        if ($("#pais").val() === "") {
+                            $("#pais").focus();
+                            alertify.error("Ingrese un País");
                         } else {
-                            if ($("#pais_aspirante").val() === "") {
-                                $("#pais_aspirante").focus();
+                            if ($("#ciudad").val() === "") {
+                                $("#ciudad").focus();
+                                alertify.error("Ingrese una Ciudad");
+                            } else {
+                                if ($("#direccion").val() === "") {
+                                    $("#direccion").focus();
+                                    alertify.error("Ingrese la Dirección");
+                                }else{
+                                	$("#btn_Guardar").attr("disabled", true);
+                                    $.ajax({
+                                        type: "POST",
+                                        url: "guardar_docentes.php",
+                                        data: $("#form_docentes").serialize(),
+                                        success: function(data) {
+                                            var val = data;
+                                            if (val == 1) {
+                                                $.gritter.add({
+                                                 title: 'Información Mensaje',
+                                                 text: '</span><br><span class="fa fa-paw"></span> Registro Guardado Correctamente <span class="text-succes fa fa-spinner fa-spin"></span>',
+                                                 sticky: false,
+                                                });
+                                                setTimeout(function() {
+                                                    location.reload();
+                                                }, 1000);
+                                            }
+                                        }
+                                    });
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+function modificar_docente() {
+    var iden = $("#ruc_ci").val();
+
+    if ($("#id_docente").val() === "") {
+            alertify.error("Seleccione un Docente");
+        } else {
+        if ($("#tipo_documento").val() === "") {
+            $("#tipo_documento").focus();
+            alertify.error("Seleccione un tipo de documento ");
+        } else {
+            if ($("#tipo_documento").val() === "Cedula" && iden.length < 10) {
+                $("#ruc_ci").focus();
+                alertify.error("Error.. Minimo 10 digitos ");
+            } else {
+                if ($("#tipo_documento").val() === "Ruc" && iden.length < 13) {
+                    $("#ruc_ci").focus();
+                    alertify.error("Error.. Minimo 13 digitos ");
+                } else {
+                    if ($("#nombres").val() === "") {
+                        $("#nombres").focus();
+                        alertify.error("Ingrese Nombres completos");
+                    } else {
+                        if ($("#apellidos").val() === "") {
+                            $("#apellidos").focus();
+                             alertify.error("Ingrese Apellidos completos");
+                        } else {
+                            if ($("#pais").val() === "") {
+                                $("#pais").focus();
                                 alertify.error("Ingrese un País");
                             } else {
-                                if ($("#ciudad_aspirante").val() === "") {
-                                    $("#ciudad_aspirante").focus();
+                                if ($("#ciudad").val() === "") {
+                                    $("#ciudad").focus();
                                     alertify.error("Ingrese una Ciudad");
                                 } else {
-                                    if ($("#direccion_aspirante").val() === "") {
-                                        $("#direccion_aspirante").focus();
+                                    if ($("#direccion").val() === "") {
+                                        $("#direccion").focus();
                                         alertify.error("Ingrese la Dirección");
                                     }else{
-                                    	$("#btn_Guardar").attr("disabled", true);
-                                        $("#form_aspirantes").submit(function(e) {
-                                            var formObj = $(this);
-                                            var formURL = formObj.attr("action");
-                                            if(window.FormData !== undefined) {	
-                                                var formData = new FormData(this);   
-                                                formURL=formURL; 
-                                                $.ajax({
-                                                    url: "aspirante/guardar_aspirantes.php",
-                                                    type: "POST",
-                                                    data:  formData,
-                                                    mimeType:"multipart/form-data",
-                                                    contentType: false,
-                                                    cache: false,
-                                                    processData:false,
-                                                    success: function(data, textStatus, jqXHR) {
-                                                        var res = data;
-                                                        if(res == 1){
-                                                        	$.gritter.add({
-																title: 'Información Mensaje',
-																text: '</span><br><span class="fa fa-paw"></span> Registro Guardado Correctamente <span class="text-succes fa fa-spinner fa-spin"></span>',
-																sticky: false,
-															});                               
-                                                            redireccionar_ingreso();
-                                                        } else{
-                                                        }
-                                                    },
-                                                    error: function(jqXHR, textStatus, errorThrown) 
-                                                    {
-                                                    } 	        
-                                                });
-                                                e.preventDefault();
-                                            } else {
-                                                var  iframeId = "unique" + (new Date().getTime());
-                                                var iframe = $('<iframe src="javascript:false;" name="'+iframeId+'" />');
-                                                iframe.hide();
-                                                formObj.attr("target",iframeId);
-                                                iframe.appendTo("body");
-                                                iframe.load(function(e)
-                                                {
-                                                    var doc = getDoc(iframe[0]);
-                                                    var docRoot = doc.body ? doc.body : doc.documentElement;
-                                                    var data = docRoot.innerHTML;
-                                                });
+                                    	$("#btn_Modificar").attr("disabled", true);
+                                            $.ajax({
+                                            type: "POST",
+                                            url: "modificar_docentes.php",
+                                            data: $("#form_docentes").serialize(),
+                                            success: function(data) {
+                                                var val = data;
+                                                if (val == 1) {
+                                                    $.gritter.add({
+                                                     title: 'Información Mensaje',
+                                                     text: '</span><br><span class="fa fa-paw"></span> Registro Modificado Correctamente <span class="text-succes fa fa-spinner fa-spin"></span>',
+                                                     sticky: false,
+                                                    });
+                                                    setTimeout(function() {
+                                                        location.reload();
+                                                    }, 1000);
+                                                }
                                             }
                                         });
-                                        $("#form_aspirantes").submit();
                                     }
                                 }
                             }
@@ -156,111 +132,14 @@ function guardar_aspirante() {
     }
 }
 
-function limpiar() {
-    $("#btn_Guardar").attr("disabled", true);
-    $("#id_aspirante").val("");
-    $("#tipo_documento").val("");
-    $("#ruc_ci").val("");
-    $("#nombres_aspirantes").val("");
-    $("#apellidos_aspirantes").val("");
-    $("#telf_aspirante").val("");
-    $("#movil_aspirante").val("");
-    $("#fnac_aspirante").val("");
-    $("#genero_aspirante").val("");
-    $("#mail_aspirante").val("");
-    $("#pais_aspirante").val("");
-    $("#ciudad_aspirante").val("");
-    $("#direccion_aspirante").val("");
-    $("#comentarios").val("");    
-}
-
-function flecha_atras(){
-    $.ajax({
-       type: "POST",
-       url: "../procesos/flechas.php",
-       data: "comprobante=" + $("#comprobante").val() + "&tabla=" + "aspirantes" + "&id_tabla=" + "id_aspirante" + "&tipo=" + 1,
-       success: function(data) {
-           var val = data;
-           if(val != ""){
-                $("#comprobante").val(val);
-                var valor = $("#comprobante").val();
-                
-                ///////////////////llamar flechas primera parte/////
-                limpiar();
-                $.getJSON('retornar.php?com=' + valor, function(data) {
-                    var tama = data.length;
-                    if (tama !== 0) {
-                        for (var i = 0; i < tama; i = i + 15) {
-                            $("#id_aspirante").val(data[i]);
-                            $("#tipo_documento").val(data[i + 1]);
-                            $("#ruc_ci").val(data[i + 2 ]);
-                            $("#nombres_aspirantes").val(data[i + 3]);
-                            $("#apellidos_aspirantes").val(data[i + 4]);
-                            $("#telf_aspirante").val(data[i + 5]);
-                            $("#movil_aspirante").val(data[i + 6]);
-                            $("#fnac_aspirante").val(data[i + 7]);
-                            $("#genero_aspirante").val(data[i + 8]);
-                            $("#mail_aspirante").val(data[i + 9]);
-                            $("#pais_aspirante").val(data[i + 10]);
-                            $("#ciudad_aspirante").val(data[i + 11]);
-                            $("#direccion_aspirante").val(data[i + 12]);
-                            $("#foto").attr("src", "fotos/"+ data[i + 13]);
-                            $("#comentarios").val(data[i + 14]);
-                        }
-                    }
-                });
-           }else{
-               alertify.alert("No hay mas registros posteriores!!");
-           }
-       }
-   }); 
-}
-
-function flecha_adelante(){
-    $.ajax({
-       type: "POST",
-       url: "../procesos/flechas.php",
-       data: "comprobante=" + $("#comprobante").val() + "&tabla=" + "aspirantes" + "&id_tabla=" + "id_aspirante" + "&tipo=" + 2,
-       success: function(data) {
-           var val = data;
-           if(val != ""){
-                $("#comprobante").val(val);
-                var valor = $("#comprobante").val();
-                ///////////////////llamar flechas primera parte/////
-                limpiar();
-                $.getJSON('retornar.php?com=' + valor, function(data) {
-                    var tama = data.length;
-                    if (tama !== 0) {
-                        for (var i = 0; i < tama; i = i + 15) {
-                            $("#id_aspirante").val(data[i]);
-                            $("#tipo_documento").val(data[i + 1]);
-                            $("#ruc_ci").val(data[i + 2 ]);
-                            $("#nombres_aspirantes").val(data[i + 3]);
-                            $("#apellidos_aspirantes").val(data[i + 4]);
-                            $("#telf_aspirante").val(data[i + 5]);
-                            $("#movil_aspirante").val(data[i + 6]);
-                            $("#fnac_aspirante").val(data[i + 7]);
-                            $("#genero_aspirante").val(data[i + 8]);
-                            $("#mail_aspirante").val(data[i + 9]);
-                            $("#pais_aspirante").val(data[i + 10]);
-                            $("#ciudad_aspirante").val(data[i + 11]);
-                            $("#direccion_aspirante").val(data[i + 12]);
-                            $("#foto").attr("src", "fotos/"+ data[i + 13]);
-                            $("#comentarios").val(data[i + 14]);
-                        }
-                    }
-                });
-           }else{
-               alertify.alert("No hay mas registros superiores!!");
-           }
-       }
-   }); 
-}
 
 function inicio (){	
 	/*funcion inicial de la imagen y  buscadores del select no topar plz*/
 	$('.modal.aside').ace_aside();
 	$('#aside-inside-modal').addClass('aside').ace_aside({container: '#my-modal > .modal-dialog'});
+
+	carga_convocatoria("convocatoria",'1');//la convocatoria y el numero de funcion
+	carga_tribunal("tribunal",'2');//el tribunal y el numero de funcion
 	
 	// tooltips 
 	$('[data-rel=tooltip]').tooltip();
@@ -285,12 +164,9 @@ function inicio (){
 	});
 
     /*procesos de guardar buscar modificar limpiar actualizar*/    		
-	$("#btn_Guardar").on("click",guardar_aspirante);
-    $("#btn_Retornar").on("click",retornar);
-    $("#btn_Ingresar").on("click",ingresar);
+	$("#btn_Guardar").on("click",guardar_docente);
+	$("#btn_Modificar").on("click",modificar_docente);
 	$("#btn_Limpiar").on("click",actualizar_form);
-    $("#btn_Atras").on("click",flecha_atras);
-    $("#btn_Adelante").on("click",flecha_adelante);
 
     /*------*/
     jQuery(function($) {
@@ -316,23 +192,20 @@ function inicio (){
 
 	    jQuery(grid_selector).jqGrid({	        
 	        datatype: "xml",
-	        url: 'xmlAspirante.php',        
-	        colNames: ['ID','DOCUMENTO','IDENTIFICACIÓN','NOMBRES','APELLIDOS','TELÉFONO','CELULAR','FECHA NACIMINETO','GENERO','CORREO','PAIS','CIUDAD','DIRECCIÓN','FOTO','COMENTARIO'],
+	        url: 'xmlDocente.php',        
+	        colNames: ['ID','DOCUMENTO','IDENTIFICACIÓN','NOMBRES','APELLIDOS','TELÉFONO','CELULAR','CORREO','PAIS','CIUDAD','DIRECCIÓN','COMENTARIO'],
 	        colModel:[      
-	            {name:'id_aspirante',index:'id_aspirante',frozen:true,align:'left',search:false},
+	            {name:'id_docente',index:'id_docente',frozen:true,align:'left',search:false},
 	            {name:'tipo_documento',index:'tipo_documento',frozen : true,align:'left',search:false},
 	            {name:'ruc_ci',index:'ruc_ci',frozen : true,align:'left',search:true},
-	            {name:'nombres_aspirantes',index:'nombres_aspirantes',frozen : true,align:'left',search:true},
-	            {name:'apellidos_aspirantes',index:'apellidos_aspirantes',frozen : true,align:'left',search:true},
-	            {name:'telf_aspirante',index:'telf_aspirante',frozen : true,align:'left',search:false},            
-	            {name:'movil_aspirante',index:'movil_aspirante',frozen : true,align:'left',search:false},
-				{name:'fnac_aspirante',index:'fnac_aspirante',frozen : true,align:'left',search:false},	            
-	            {name:'genero_aspirante',index:'genero_aspirante',frozen : true,align:'left',search:false},
-	            {name:'mail_aspirante',index:'mail_aspirante',frozen : true,align:'left',search:false},
-	            {name:'pais_aspirante',index:'pais_aspirante',frozen : true,align:'left',search:false},
-	            {name:'ciudad_aspirante',index:'ciudad_aspirante',frozen : true,align:'left',search:false},
-	            {name:'direccion_aspirante',index:'direccion_aspirante',frozen : true,align:'left',search:false},
-                {name:'imagen',index:'imagen',frozen : true,align:'left',search:false},
+	            {name:'nombres',index:'nombres',frozen : true,align:'left',search:true},
+	            {name:'apellidos',index:'apellidos',frozen : true,align:'left',search:true},
+	            {name:'telf',index:'telf',frozen : true,align:'left',search:false},            
+	            {name:'movil',index:'movil',frozen : true,align:'left',search:false},
+	            {name:'mail',index:'mail',frozen : true,align:'left',search:false},
+	            {name:'pais',index:'pais',frozen : true,align:'left',search:false},
+	            {name:'ciudad',index:'ciudad',frozen : true,align:'left',search:false},
+	            {name:'direccion',index:'direccion',frozen : true,align:'left',search:false},
                 {name:'comentarios',index:'comentarios',frozen : true,align:'left',search:false},
 	        ],          
 	        rowNum: 10,       
@@ -341,9 +214,9 @@ function inicio (){
 	        height:200,
 	        rowList: [10,20,30],
 	        pager: pager_selector,        
-	        sortname: 'id_aspirante',
+	        sortname: 'id_docente',
 	        sortorder: 'asc',
-	        caption: 'LISTA DE ASPIRANTES',	        
+	        caption: 'LISTA DE DOCENTES',	        
 	        altRows: true,
 	        multiselect: false,
 	        multiboxonly: true,
@@ -361,20 +234,17 @@ function inicio (){
 	            var gsr = jQuery(grid_selector).jqGrid('getGridParam','selrow');                                              
             	var ret = jQuery(grid_selector).jqGrid('getRowData',gsr);
 
-                $("#id_aspirante").val(ret.id_aspirante);
+                $("#id_docente").val(ret.id_docente);
                 $("#tipo_documento").val(ret.tipo_documento);
                 $("#ruc_ci").val(ret.ruc_ci);
-                $("#nombres_aspirantes").val(ret.nombres_aspirantes);
-                $("#apellidos_aspirantes").val(ret.apellidos_aspirantes);
-                $("#telf_aspirante").val(ret.telf_aspirante);
-                $("#movil_aspirante").val(ret.movil_aspirante);
-                $("#fnac_aspirante").val(ret.fnac_aspirante);
-                $("#genero_aspirante").val(ret.genero_aspirante);
-                $("#mail_aspirante").val(ret.mail_aspirante);
-                $("#pais_aspirante").val(ret.pais_aspirante);
-                $("#ciudad_aspirante").val(ret.ciudad_aspirante);
-                $("#direccion_aspirante").val(ret.direccion_aspirante);
-                $("#foto").attr("src", "fotos/"+ ret.imagen);
+                $("#nombres").val(ret.nombres);
+                $("#apellidos").val(ret.apellidos);
+                $("#telf").val(ret.telf);
+                $("#movil").val(ret.movil);
+                $("#mail").val(ret.mail);
+                $("#pais").val(ret.pais);
+                $("#ciudad").val(ret.ciudad);
+                $("#direccion").val(ret.direccion);
                 $("#comentarios").val(ret.comentarios);
 
 	            $('#myModal').modal('hide');
@@ -382,7 +252,7 @@ function inicio (){
 	            // $("#btn_0").append("<span class='glyphicon glyphicon-log-in'></span> Modificar");     	            
 	        },
 	        
-	        caption: "LISTA ASPIRANTES"
+	        caption: "LISTA DOCENTEES"
 	    });
 
 		jQuery(grid_selector).jqGrid('hideCol', "txt_0");

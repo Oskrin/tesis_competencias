@@ -3,17 +3,17 @@
 	include 'funciones_generales.php';		
 	$conexion = conectarse();
 	$sql = "";
-	if($_GET['fun'] == "1"){//para idiomas
+	if($_GET['fun'] == "1"){//para convocatoria
 		if($_GET['tipo'] == "0"){//indica que se carga al inicio de la pagina
-			$sql = "select id_idioma, nombre_idioma from idiomas";
+			$sql = "select id_convocatoria, descripcion_convocatoria from convocatoria";
 			cargarSelect($conexion,$sql);
 		}else{
 
 		}
 	}else{
-		if($_GET['fun'] == "2"){//para provincias
+		if($_GET['fun'] == "2"){//para tribunal
 			if($_GET['tipo'] == "0"){//indica que se carga al inicio de la pagina
-				$sql = "select id_provincia,descripcion from provincia where id_pais = '$_GET[id]'";
+				$sql = "select id_tribunal, area_tribunal from tribunal";
 				cargarSelect($conexion,$sql);
 			}else{
 
