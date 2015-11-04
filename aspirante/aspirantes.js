@@ -60,91 +60,108 @@ function ingresar() {
 } 
 
 function guardar_aspirante() {
+    var expr = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
     var iden = $("#ruc_ci").val();
+    var correo = $("#mail_aspirante").val();
     
-    if ($("#tipo_documento").val() === "") {
+    if ($("#tipo_documento").val() == "") {
         $("#tipo_documento").focus();
         alertify.error("Seleccione un tipo de documento ");
     } else {
-        if ($("#tipo_documento").val() === "Cedula" && iden.length < 10) {
+        if ($("#tipo_documento").val() == "Cedula" && iden.length < 10) {
             $("#ruc_ci").focus();
             alertify.error("Error.. Minimo 10 digitos ");
         } else {
-            if ($("#tipo_documento").val() === "Ruc" && iden.length < 13) {
-                $("#ruc_ci").focus();
-                alertify.error("Error.. Minimo 13 digitos ");
+            if ($("#nombres_aspirantes").val() == "") {
+                $("#nombres_aspirantes").focus();
+                alertify.error("Ingrese Nombres completos");
             } else {
-                if ($("#nombres_aspirantes").val() === "") {
-                    $("#nombres_aspirantes").focus();
-                    alertify.error("Ingrese Nombres completos");
+                if ($("#apellidos_aspirantes").val() == "") {
+                    $("#apellidos_aspirantes").focus();
+                     alertify.error("Ingrese Apellidos completos");
                 } else {
-                    if ($("#apellidos_aspirantes").val() === "") {
-                        $("#apellidos_aspirantes").focus();
-                         alertify.error("Ingrese Apellidos completos");
+                    if ($("#fnac_aspirante").val() == "") {
+                        $("#fnac_aspirante").focus();
+                        alertify.error("Ingrese Fecha Nacimiento");
                     } else {
-                        if ($("#fnac_aspirante").val() === "") {
-                            $("#fnac_aspirante").focus();
-                            alertify.error("Ingrese Fecha Nacimiento");
+                        if ($("#pais_aspirante").val() == "") {
+                            $("#pais_aspirante").focus();
+                            alertify.error("Ingrese un País");
                         } else {
-                            if ($("#pais_aspirante").val() === "") {
-                                $("#pais_aspirante").focus();
-                                alertify.error("Ingrese un País");
+                            if ($("#ciudad_aspirante").val() == "") {
+                                $("#ciudad_aspirante").focus();
+                                alertify.error("Ingrese una Ciudad");
                             } else {
-                                if ($("#ciudad_aspirante").val() === "") {
-                                    $("#ciudad_aspirante").focus();
-                                    alertify.error("Ingrese una Ciudad");
+                                if ($("#direccion_aspirante").val() == "") {
+                                    $("#direccion_aspirante").focus();
+                                    alertify.error("Ingrese la Dirección");
                                 } else {
-                                    if ($("#direccion_aspirante").val() === "") {
-                                        $("#direccion_aspirante").focus();
-                                        alertify.error("Ingrese la Dirección");
-                                    }else{
-                                    	$("#btn_Guardar").attr("disabled", true);
-                                        $("#form_aspirantes").submit(function(e) {
-                                            var formObj = $(this);
-                                            var formURL = formObj.attr("action");
-                                            if(window.FormData !== undefined) {	
-                                                var formData = new FormData(this);   
-                                                formURL=formURL; 
-                                                $.ajax({
-                                                    url: "aspirante/guardar_aspirantes.php",
-                                                    type: "POST",
-                                                    data:  formData,
-                                                    mimeType:"multipart/form-data",
-                                                    contentType: false,
-                                                    cache: false,
-                                                    processData:false,
-                                                    success: function(data, textStatus, jqXHR) {
-                                                        var res = data;
-                                                        if(res == 1){
-                                                        	$.gritter.add({
-																title: 'Información Mensaje',
-																text: '</span><br><span class="fa fa-paw"></span> Registro Guardado Correctamente <span class="text-succes fa fa-spinner fa-spin"></span>',
-																sticky: false,
-															});                               
-                                                            redireccionar_ingreso();
-                                                        } else{
+                                    if (!expr.test(correo) || correo == "") {
+                                        $("#mail_aspirante").focus();
+                                        alertify.error("Ingrese un correo");
+                                    } else { 
+                                        if ($("#clave").val() == "") {
+                                           $("#clave").focus();
+                                           alertify.error("Ingrese una contraseña");
+                                        } else{
+                                            if ($("#clave2").val() == "") {
+                                               $("#clave2").focus();
+                                               alertify.error("Confirme contraseña");
+                                            } else {  
+                                                if ($("#clave").val() != $("#clave2").val()) {
+                                                   $("#clave2").focus();
+                                                   alertify.error("Las contraseñas Coinciden");
+                                                } else {
+                                                	$("#btn_Guardar").attr("disabled", true);
+                                                    $("#form_aspirantes").submit(function(e) {
+                                                        var formObj = $(this);
+                                                        var formURL = formObj.attr("action");
+                                                        if(window.FormData !== undefined) {	
+                                                            var formData = new FormData(this);   
+                                                            formURL=formURL; 
+                                                            $.ajax({
+                                                                url: "aspirante/guardar_aspirantes.php",
+                                                                type: "POST",
+                                                                data:  formData,
+                                                                mimeType:"multipart/form-data",
+                                                                contentType: false,
+                                                                cache: false,
+                                                                processData:false,
+                                                                success: function(data, textStatus, jqXHR) {
+                                                                    var res = data;
+                                                                    if(res == 1){
+                                                                    	$.gritter.add({
+            																title: 'Información Mensaje',
+            																text: '<span class="fa fa-paw"></span> Registro Guardado Correctamente <span class="text-succes fa fa-spinner fa-spin"></span>',
+            																sticky: false,
+            															});                               
+                                                                        redireccionar_ingreso();
+                                                                    } else{
+                                                                    }
+                                                                },
+                                                                error: function(jqXHR, textStatus, errorThrown) 
+                                                                {
+                                                                } 	        
+                                                            });
+                                                            e.preventDefault();
+                                                        } else {
+                                                            var  iframeId = "unique" + (new Date().getTime());
+                                                            var iframe = $('<iframe src="javascript:false;" name="'+iframeId+'" />');
+                                                            iframe.hide();
+                                                            formObj.attr("target",iframeId);
+                                                            iframe.appendTo("body");
+                                                            iframe.load(function(e)
+                                                            {
+                                                                var doc = getDoc(iframe[0]);
+                                                                var docRoot = doc.body ? doc.body : doc.documentElement;
+                                                                var data = docRoot.innerHTML;
+                                                            });
                                                         }
-                                                    },
-                                                    error: function(jqXHR, textStatus, errorThrown) 
-                                                    {
-                                                    } 	        
-                                                });
-                                                e.preventDefault();
-                                            } else {
-                                                var  iframeId = "unique" + (new Date().getTime());
-                                                var iframe = $('<iframe src="javascript:false;" name="'+iframeId+'" />');
-                                                iframe.hide();
-                                                formObj.attr("target",iframeId);
-                                                iframe.appendTo("body");
-                                                iframe.load(function(e)
-                                                {
-                                                    var doc = getDoc(iframe[0]);
-                                                    var docRoot = doc.body ? doc.body : doc.documentElement;
-                                                    var data = docRoot.innerHTML;
-                                                });
-                                            }
-                                        });
-                                        $("#form_aspirantes").submit();
+                                                    });
+                                                    $("#form_aspirantes").submit();
+                                                }    
+                                            }    
+                                        }    
                                     }
                                 }
                             }

@@ -9,10 +9,10 @@ $conexion = conectarse();
 		$user = $_POST['txt_1'];
 		$pass = $_POST['txt_2'];		
 		$acu=0;				
-		$result = pg_query("SELECT * FROM aspirantes WHERE identificacion_aspirante='$user' AND clave='$pass'");
+		$result = pg_query("SELECT * FROM aspirantes WHERE mail_aspirante='$user' AND clave='$pass'");
 		while ($row = pg_fetch_row($result)) {			
-			$_SESSION['id']=$row[0]; 
-			$_SESSION['nombrescompletos']=$row[3] . "  " . $row[4] ;
+			$_SESSION['id'] = $row[0]; 
+			$_SESSION['correo'] = $row[9];
 			$acu=1;
 		}
 

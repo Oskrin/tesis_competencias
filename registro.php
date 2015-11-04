@@ -132,8 +132,9 @@
 																			<i class="ace-icon fa fa-times"></i>
 																		</button>
 																		<i class="ace-icon fa fa-check green"></i>
-																		Bienvenido, Su usuario y Contraseña seran su número de identificación.
+																		Atención.. Su usuario es su correo electrónico.
 																	</div>
+
 																	<form class="form-horizontal" role="form" name="form_aspirantes" id="form_aspirantes">
 																		<div class="col-sm-4">
 																			<div class="form-group">
@@ -167,7 +168,7 @@
 																			</div>
 
 																			<div class="form-group">																	
-																				<label class="col-sm-4 control-label no-padding-right" for="fnac_aspirante">Fecha Nacimiento: <font color="red">*</font></label>
+																				<label class="col-sm-4 control-label no-padding-right" for="fnac_aspirante">Fec. Nacimiento: <font color="red">*</font></label>
 																				<div class="col-sm-8">
 																					<div class="input-group">
 																						<input class="form-control date-picker" id="fnac_aspirante" name="fnac_aspirante" readonly type="text" data-date-format="yyyy-mm-dd" />
@@ -179,19 +180,23 @@
 																			</div>
 
 																			<div class="form-group">
-																				<label class="col-sm-4 control-label no-padding-right" for="mail_aspirante"> Correo:</label>
+																				<label class="col-sm-4 control-label no-padding-right" for="pais_aspirante"> País: <font color="red">*</font></label>
 																				<div class="col-sm-8">
-																					<span class="block input-icon input-icon-right">
-																						<input type="text" id="mail_aspirante" name="mail_aspirante" placeholder="Correo Aspirante" class="form-control" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}" />
-																						<i class="ace-icon fa fa-envelope fa-flip-horizontal"></i>
-									                                                </span>
+																					<input type="text" id="pais_aspirante" name="pais_aspirante"  placeholder="País Aspirante" class="form-control" data-toggle="tooltip" data-original-title=""  />																																																						
 																				</div>
 																			</div>
 
 																			<div class="form-group">
-																				<label class="col-sm-4 control-label no-padding-right" for="ciudad_aspirante"> Ciudad: <font color="red">*</font></label>
+																				<label class="col-sm-4 control-label no-padding-right" for="direccion_aspirante"> Dirección: <font color="red">*</font></label>
 																				<div class="col-sm-8">
-																					<input type="text" id="ciudad_aspirante" name="ciudad_aspirante"  placeholder="Ciudad Aspirante" class="form-control" data-toggle="tooltip" data-original-title=""  />																																																						
+																					<input type="text" id="direccion_aspirante" name="direccion_aspirante"  placeholder="Dirección Aspirante" class="form-control" data-toggle="tooltip" data-original-title=""  />																																																						
+																				</div>
+																			</div>
+
+																			<div class="form-group">
+																				<label class="col-sm-4 control-label no-padding-right" for="clave"> Contraseña: <font color="red">*</font></label>
+																				<div class="col-sm-8">
+																					<input type="password" id="clave" name="clave"  placeholder="Ingrese Contraseña" class="form-control" data-toggle="tooltip" data-original-title="" required pattern="[0-9]{10,10}"/>																																																						
 																				</div>
 																			</div>
 
@@ -205,7 +210,7 @@
 
 																		<div class="col-sm-4">
 																			<div class="form-group">
-																				<label class="col-sm-4 control-label no-padding-right" for="ruc_ci"> RUC/C.I.: <font color="red">*</font></label>
+																				<label class="col-sm-4 control-label no-padding-right" for="ruc_ci"> Identificación: <font color="red">*</font></label>
 																				<div class="col-sm-8">
 																					<input type="text" id="ruc_ci" name="ruc_ci"  placeholder="Identificación Aspirante" class="form-control" data-toggle="tooltip" data-original-title="" required pattern="[0-9]{10,10}" maxlength="10" minlength="10" />																																																						
 																				</div>
@@ -239,16 +244,26 @@
 																			</div>
 
 																			<div class="form-group">
-																				<label class="col-sm-4 control-label no-padding-right" for="pais_aspirante"> País: <font color="red">*</font></label>
+																				<label class="col-sm-4 control-label no-padding-right" for="ciudad_aspirante"> Ciudad: <font color="red">*</font></label>
 																				<div class="col-sm-8">
-																					<input type="text" id="pais_aspirante" name="pais_aspirante"  placeholder="País Aspirante" class="form-control" data-toggle="tooltip" data-original-title=""  />																																																						
+																					<input type="text" id="ciudad_aspirante" name="ciudad_aspirante"  placeholder="Ciudad Aspirante" class="form-control" data-toggle="tooltip" data-original-title=""  />																																																						
 																				</div>
 																			</div>
 
 																			<div class="form-group">
-																				<label class="col-sm-4 control-label no-padding-right" for="direccion_aspirante"> Dirección: <font color="red">*</font></label>
+																				<label class="col-sm-4 control-label no-padding-right" for="mail_aspirante"> Correo: <font color="red">*</font></label>
 																				<div class="col-sm-8">
-																					<input type="text" id="direccion_aspirante" name="direccion_aspirante"  placeholder="Dirección Aspirante" class="form-control" data-toggle="tooltip" data-original-title=""  />																																																						
+																					<span class="block input-icon input-icon-right">
+																						<input type="text" id="mail_aspirante" name="mail_aspirante" placeholder="Correo Aspirante" class="form-control" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}" />
+																						<i class="ace-icon fa fa-envelope fa-flip-horizontal"></i>
+									                                                </span>
+																				</div>
+																			</div>
+
+																			<div class="form-group">
+																				<label class="col-sm-4 control-label no-padding-right" for="clave2"> Confirmar: <font color="red">*</font></label>
+																				<div class="col-sm-8">
+																					<input type="password" id="clave2" name="clave2"  placeholder="Ingrese Contraseña" class="form-control" data-toggle="tooltip" data-original-title="" required pattern="[0-9]{10,10}"/>																																																						
 																				</div>
 																			</div>
 
@@ -269,8 +284,6 @@
 											                                </div>	
 																		</div>
 																	</form>	
-
-																	
 
 																	<div class="col-sm-12">
 																		<div class="space-10"></div>

@@ -12,7 +12,7 @@ if (empty($_SESSION['id'])) {
 //Menu banner arriba usuario perfil dependientes del nivel de usuario
 function menu_arriba() {	
 	print'
-	<div id="navbar" class="navbar navbar-default    navbar-collapse       h-navbar">
+	<div id="navbar" class="navbar navbar-default navbar-collapse h-navbar">
 			<script type="text/javascript">
 				try{ace.settings.check("navbar" , "fixed")}catch(e){}
 			</script>
@@ -81,7 +81,7 @@ function menu_arriba() {
 							<a>
 								<i class="ace-icon fa fa-user"></i>
 								Bienvenido: 
-								<span class="badge badge-warning">'.$_SESSION['nombrescompletos'].'</span>
+								<span class="badge badge-warning">'.$_SESSION['correo'].'</span>
 							</a>
 						</li>
 					</ul>

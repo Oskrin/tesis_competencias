@@ -29,12 +29,12 @@ $nombre = basename($_FILES["archivo"]["name"], "." . $extension);
 //////////////////////////
 /////////////////guardar aspirantes///////
 if ($nombre == "") {
-    $sql = "insert into aspirantes values ('$cont','$_POST[tipo_documento]','$_POST[ruc_ci]','".strtoupper($_POST['nombres_aspirantes'])."','".strtoupper($_POST['apellidos_aspirantes'])."','$_POST[telf_aspirante]','$_POST[movil_aspirante]','$_POST[fnac_aspirante]','$_POST[genero_aspirante]','$_POST[mail_aspirante]','".strtoupper($_POST['pais_aspirante'])."','".strtoupper($_POST['ciudad_aspirante'])."','$_POST[direccion_aspirante]','','$_POST[comentarios]','$_POST[ruc_ci]','1','$fecha')";         
+    $sql = "insert into aspirantes values ('$cont','$_POST[tipo_documento]','$_POST[ruc_ci]','".strtoupper($_POST['nombres_aspirantes'])."','".strtoupper($_POST['apellidos_aspirantes'])."','$_POST[telf_aspirante]','$_POST[movil_aspirante]','$_POST[fnac_aspirante]','$_POST[genero_aspirante]','$_POST[mail_aspirante]','".strtoupper($_POST['pais_aspirante'])."','".strtoupper($_POST['ciudad_aspirante'])."','$_POST[direccion_aspirante]','','$_POST[comentarios]','$_POST[clave2]','1','$fecha')";         
     $guardar = guardarSql($conexion,$sql);
 } else {
     $foto = $cont . '.' . $extension;
     move_uploaded_file($_FILES["archivo"]["tmp_name"], "fotos/" . $foto);
-    $sql = "insert into aspirantes values ('$cont','$_POST[tipo_documento]','$_POST[ruc_ci]','".strtoupper($_POST['nombres_aspirantes'])."','".strtoupper($_POST['apellidos_aspirantes'])."','$_POST[telf_aspirante]','$_POST[movil_aspirante]','$_POST[fnac_aspirante]','$_POST[genero_aspirante]','$_POST[mail_aspirante]','".strtoupper($_POST['pais_aspirante'])."','".strtoupper($_POST['ciudad_aspirante'])."','$_POST[direccion_aspirante]','$foto','$_POST[comentarios]','$_POST[ruc_ci]','1','$fecha')";         
+    $sql = "insert into aspirantes values ('$cont','$_POST[tipo_documento]','$_POST[ruc_ci]','".strtoupper($_POST['nombres_aspirantes'])."','".strtoupper($_POST['apellidos_aspirantes'])."','$_POST[telf_aspirante]','$_POST[movil_aspirante]','$_POST[fnac_aspirante]','$_POST[genero_aspirante]','$_POST[mail_aspirante]','".strtoupper($_POST['pais_aspirante'])."','".strtoupper($_POST['ciudad_aspirante'])."','$_POST[direccion_aspirante]','$foto','$_POST[comentarios]','$_POST[clave2]','1','$fecha')";         
     $guardar = guardarSql($conexion,$sql);
 }
 
